@@ -3,32 +3,218 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>My Website</title>
+  <title>Mars</title>
 
   <style>
+    
     body {
   margin: 0;
-  padding-top: 60px;      /* keeps content from hiding under the header */
+  padding-top: 120px;      /* keeps content from hiding under the header */
   font-family: sans-serif;
   background: #E96439;
 }
 
 header {
   position: fixed;
-  top: 0; left: 0;
-  width: 100%;
-  height: 100px;
-  background: #673D33;
+  top: 40px;                 /* same as the navbar height, pushes the band below it */
+  left: 0; width: 100%;
+  height: 80px;             /* band height */
+  background: #6b3b34;       /* keep your own band colour */
   display: flex;
-  align-items: center;
-  justify-content: center;   /* this puts the title in the middle */
-  z-index: 10;
+  align-items: flex-end;       /* text up/down: flex-start (top), center, flex-end (bottom) */
+  justify-content: flex-start;   /* text left/right: flex-start, center, flex-end */
+  padding-left: 30px;          /* adds some space on the left for the logo */
+  padding-bottom: 20px;
+  box-sizing: border-box;
+  z-index: 5;                /* lower than the navbar's 10 */
 }
-
 .logo {
   color: white;
   font-weight: bold;
   font-size: 40px;
+}
+
+.box {
+  background: #14141c;
+  color: #f2f2f2;
+  border: 1px solid #2a2a35;
+  border-radius: 6px;
+  padding: 24px;
+  max-width: 600px;
+  min-height: 450px;
+  margin: 100px auto 60px 60px;      /* centres the box on the page */
+}
+.box h2 {
+  margin: 0 0 10px;
+}
+.box p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+.box2 {
+  background: #14141c;
+  color: #f2f2f2;
+  border: 1px solid #2a2a35;
+  border-radius: 6px;
+  padding: 24px;
+  max-width: 600px;
+  min-height: 450px;
+  margin: 100px 60px 60px auto ;      /* centres the box on the page */
+}
+.box2 h2 {
+  margin: 0 0 10px; 
+}
+.box2 p {
+  margin: 0;
+  line-height: 1.6;
+}
+
+
+body { margin: 0; padding-top: 60px; font-family: sans-serif; }
+
+.navbar {
+  position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+  background: #0a0a0f; border-bottom: 1px solid #2a2a35;
+  display: flex; align-items: center;
+  justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+  z-index: 10;
+}
+.links { display: flex; overflow-x: auto; white-space: nowrap; }
+.navbar a { color: rgb(248, 248, 248); text-decoration: none; margin-left: 30px; }
+.navbar a:hover { color: #4da3ff; }
+.logo { color: white; font-weight: bold; font-size: 20px; margin-left: 0; }
+
+
+  .marsrover {
+  display: flex;
+  align-items: flex-end;      /* lines the pictures up vertically */
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;          /* they stack on narrow screens */
+  padding: 20px;
+}
+
+.photo {
+  max-width: 100%;          /* never wider than the screen */
+  height: auto;             /* keeps the proportions, no stretching */
+  border-radius: 14px;
+}
+
+.photo.planet { width: 300px; }   /* change these numbers to resize */
+.photo.rover  { width: 600px; }
+
+
+  .marsplanet {
+  display: flex;
+  align-items: flex-start;      /* lines the pictures up vertically */
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;          /* they stack on narrow screens */
+  padding: 20px;
+}
+
+.photo {
+  max-width: 100%;          /* never wider than the screen */
+  height: auto;             /* keeps the proportions, no stretching */
+  border-radius: 14px;
+}
+
+.photo.planet { width: 300px; }   /* change these numbers to resize */
+.photo.rover  { width: 600px; }
+
+
+/* ---- boxes stay where they were, images sit in the corners ---- */
+.feature {
+  display: flex;
+  justify-content: space-between;   /* first item left edge, last item right edge */
+  gap: 30px;
+  flex-wrap: wrap;                  /* stack on narrow screens */
+  padding: 0 60px;                  /* same 60px side space the boxes had */
+}
+
+/* boxes: same size and vertical spacing as before */
+.feature .box,
+.feature .box2 {
+  flex: 0 1 600px;                  /* 600px wide, shrinks on small screens */
+  margin: 100px 0 60px;             /* top 100, bottom 60, sides handled by the row */
+}
+
+/* planet (picture + caption): top right */
+.feature .planet-fig {
+  align-self: flex-start;           /* top of the row */
+  margin-top: 125px;                /* lines up with the top of the box */
+}
+
+/* rover (picture + caption): bottom left */
+.feature .rover-fig {
+  align-self: flex-end;             /* bottom of the row */
+  margin-bottom: 116px;             /* was 140px; the caption now takes about 24px, so the picture stays put */
+}
+
+.feature .photo {
+  width: 650px;
+  height: 400px;
+  object-fit: cover;        /* fills the space, crops the edges instead of stretching */
+  display: block;           /* removes the small gap under the picture */
+}
+
+.feature .photo.planet {
+  object-fit: contain;      /* shows the whole planet, nothing cut off */
+  background: #000;         /* blends with the black behind the planet */
+}
+
+/* ---- captions under the pictures ---- */
+.feature figure {
+  margin: 0;                /* removes the browser's default spacing */
+}
+
+.feature figcaption {
+  color: #fff;
+  font-size: 30px;
+  text-align: center;
+  margin-top: 8px;
+}
+
+/* ---- wide box (far left to far right) with the calculator ---- */
+.feature .wide-box {
+  flex: 1;                  /* fills the whole row, from the left box edge to the right box edge */
+  background: #14141c;
+  color: #f2f2f2;
+  border: 1px solid #2a2a35;
+  border-radius: 6px;
+  padding: 24px;
+  margin: 0 0 60px;         /* space below; the box above already leaves space on top */
+}
+.wide-box h2 {
+  margin: 0 0 10px;
+}
+.wide-box label {
+  display: block;
+  margin-bottom: 8px;
+}
+.wide-box input {
+  width: 100%;
+  max-width: 300px;
+  padding: 10px 12px;
+  background: #0a0a0f;
+  color: #f2f2f2;
+  border: 1px solid #2a2a35;
+  border-radius: 8px;
+  font: inherit;
+}
+.wide-box input:focus {
+  outline: none;
+  border-color: #4da3ff;
+}
+.wide-box .result {
+  margin: 16px 0 0;
+  font-size: 24px;
+}
+.wide-box .note {
+  margin: 6px 0 0;
+  color: #9aa1b4;
 }
   </style>
   <!-- <link rel="stylesheet" href="style.css"> -->
@@ -36,22 +222,83 @@ header {
 
 <body>
   <header>
+    <nav class="navbar">
+  <a class="logo" href="Testing.html">The Solar System</a>
+  <div class="links">
+  <a href="sun.html">Sun</a>
+  <a href="moon.html">Moon</a>
+  <a href="mercury.html">Mercury</a>
+  <a href="venus.html">Venus</a>
+  <a href="earth.html">Earth</a>
+  <a href="mars.html">Mars</a>
+  <a href="jupiter.html">Jupiter</a>
+  <a href="saturn.html">Saturn</a>
+  <a href="uranus.html">Uranus</a>
+  <a href="neptune.html">Neptune</a>
+</div>
+</nav>
   <span class="logo">Mars</span>
   </header>
   <main>
-    <!-- the page's main content -->
-    <section>
-      <h1>Page title</h1>
-      <p>Some text.</p>
-    </section>
-  </main>
+
+  <!-- first box on the left, planet picture at the top right -->
+  <div class="feature">
+    <div class="box">
+      <h2>Mars</h2>
+      <p>Type your text here.</p>
+    </div>
+    <figure class="planet-fig">
+      <img class="photo planet" src="Images/marsplanet.png" alt="The planet Mars">
+      <figcaption>The planet Mars</figcaption>
+    </figure>
+  </div>
+
+  <!-- rover picture at the bottom left, second box on the right -->
+  <div class="feature">
+    <figure class="rover-fig">
+      <img class="photo rover" src="Images/marsrover.png" alt="The Perseverance rover on Mars">
+      <figcaption>The Perseverance rover</figcaption>
+    </figure>
+    <div class="box2">
+      <h2>Second box</h2>
+      <p>Text here.</p>
+    </div>
+  </div>
+
+  <!-- wide box under the second box: multiplies a number -->
+  <div class="feature">
+    <div class="wide-box">
+      <h2>Multiplier</h2>
+      <label for="num">Enter a number</label>
+      <input id="num" type="number" step="any" placeholder="Type a number">
+      <p class="result">Result: <span id="result">-</span></p>
+      <p class="note">Your number is multiplied by <span id="mult"></span></p>
+    </div>
+  </div>
+
+</main>
 
   <footer>
     <!-- copyright, links, contact info -->
   </footer>
 
   <script>
-    // your JavaScript goes here (or link a file below)
+    const MULTIPLIER = 2.4;   // placeholder: change this number to whatever you want to multiply by
+
+    const input  = document.getElementById("num");
+    const result = document.getElementById("result");
+    document.getElementById("mult").textContent = MULTIPLIER;
+
+    // runs every time the number in the box changes
+    input.addEventListener("input", function () {
+      const value = parseFloat(input.value);
+      if (isNaN(value)) {
+        result.textContent = "-";          // nothing typed yet
+      } else {
+        // toFixed(6) then Number() removes long decimals like 7.199999999
+        result.textContent = Number((value * MULTIPLIER).toFixed(6));
+      }
+    });
   </script>
   <!-- <script src="script.js"></script> -->
 </body>
