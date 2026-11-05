@@ -1,37 +1,258 @@
 <!doctype html>
 <html>
 <head>
-<style>
-.navbar {
-    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-    background: #e7c03fde; border-bottom: 1px solid #2a2a35;
-    display: flex; align-items: center;
-    justify-content: space-between; padding: 0 30px; box-sizing: border-box;
-    z-index: 10;
-  }
-.navbar a { color: rgb(5, 3, 3); text-decoration: none; margin-left: 30px; }
-.navbar a:hover { color: #4da3ff; }
-body { margin: 0; padding-top: 60px; font-family: sans-serif; background: #e4d2a0fd; }
-
-.links { display: flex; overflow-x: auto; white-space: nowrap; }
-.logo { color: rgb(0, 0, 0); font-weight: bold; font-size: 20px; }
-
-  </style>
+    <title>The Sun</title>
+ 
+    <style>
+ 
+        body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: sans-serif;
+            background-color: #e6d3a1;
+        }
+ 
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: #e8c34e; border-bottom: 1px solid black;
+            display: flex; align-items: center;
+            justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+            z-index: 10;
+        }
+        .links { display: flex; overflow-x: auto; white-space: nowrap; }
+        .navbar a { color: black; text-decoration: none; margin-left: 30px; }
+        .navbar a:hover { color: #cc5500; }
+        .logo { color: black; font-weight: bold; font-size: 20px; }
+ 
+        .page {
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+ 
+        .page-title {
+            text-align: center;
+            margin: 30px 0 0;
+            font-size: 48px;
+            color: #cc5500;
+        }
+ 
+        .row {
+            display: flex;
+            gap: 30px;
+            height: 450px;
+            padding: 30px 40px;
+        }
+ 
+        .pic {
+            flex: 0 1 50%;
+        }
+        .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+ 
+        .textbox {
+            flex: 0 1 50%;
+            box-sizing: border-box;
+            padding: 25px 30px;
+            background-color: #f3e6bd;
+            border: 2px solid #cc5500;
+            border-radius: 14px;
+            overflow-y: auto;
+        }
+        .textbox h2 {
+            margin: 0 0 18px;
+            font-size: 38px;
+            color: #cc5500;
+        }
+        .textbox p {
+            margin: 0 0 14px;
+            font-size: 24px;
+            color: #222;
+        }
+ 
+        .layers-title {
+            text-align: center;
+            margin: 40px 0 0;
+            font-size: 44px;
+            color: #cc5500;
+        }
+ 
+        .layers-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 60px;
+            padding: 30px 60px 60px;
+        }
+ 
+        .layered-sun {
+            width: 560px;
+            height: 560px;
+            position: relative;
+            flex: none;
+        }
+ 
+        .layer {
+            position: absolute;
+            border-radius: 50%;
+            border: 2px solid rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+        }
+        .layer:hover {
+            filter: brightness(1.2);
+        }
+ 
+        .selected {
+            outline: 4px solid #cc5500;
+        }
+ 
+        .corona      { width: 540px; height: 540px; top: 10px;  left: 10px;  background-color: #fff0b8; }
+        .photosphere { width: 440px; height: 440px; top: 60px;  left: 60px;  background-color: #ffd84a; }
+        .convective  { width: 360px; height: 360px; top: 100px; left: 100px; background-color: #ffb02e; }
+        .radiative   { width: 240px; height: 240px; top: 160px; left: 160px; background-color: #ff7a1a; }
+        .core        { width: 110px; height: 110px; top: 225px; left: 225px; background-color: #e03a10; }
+ 
+        .layer-info {
+            width: 460px;
+            box-sizing: border-box;
+            padding: 25px 30px;
+            background-color: #f3e6bd;
+            border: 2px solid #cc5500;
+            border-radius: 14px;
+        }
+        .layer-info h2 {
+            margin: 0 0 10px;
+            font-size: 36px;
+            color: #cc5500;
+        }
+        .layer-info .info-temp {
+            margin: 0 0 15px;
+            font-size: 26px;
+            font-weight: bold;
+            color: #222;
+        }
+        .layer-info .info-desc {
+            margin: 0;
+            font-size: 24px;
+            color: #222;
+        }
+ 
+    </style>
 </head>
+ 
 <body>
-  <nav class="navbar">
-    <a class="logo" href="Solar.html">The Solar System</a>
-    <div class="links">
-      <a href="sun.html">Sun</a>
-      <a href="moon.html">Moon</a>
-      <a href="mercury.html">Mercury</a>
-      <a href="venus.html">Venus</a>
-      <a href="earth.html">Earth</a>
-      <a href="mars.html">Mars</a>
-      <a href="jupiter.html">Jupiter</a>
-      <a href="saturn.html">Saturn</a>
-      <a href="uranus.html">Uranus</a>
-      <a href="neptune.html">Neptune</a>
+ 
+    <nav class="navbar">
+        <a class="logo" href="Solar.html" style="margin-left: 0;">The Solar System</a>
+        <div class="links">
+            <a href="sun.html">Sun</a>
+            <a href="moon.html">Moon</a>
+            <a href="mercury.html">Mercury</a>
+            <a href="venus.html">Venus</a>
+            <a href="earth.html">Earth</a>
+            <a href="mars.html">Mars</a>
+            <a href="jupiter.html">Jupiter</a>
+            <a href="saturn.html">Saturn</a>
+            <a href="uranus.html">Uranus</a>
+            <a href="neptune.html">Neptune</a>
+        </div>
+    </nav>
+ 
+    <div class="page">
+ 
+    <h1 class="page-title">The Sun</h1>
+ 
+    <div class="row">
+        <div class="pic">
+            <img src="images/sun1.jpg" alt="The Sun">
+        </div>
+        <div class="textbox">
+            <h2>Our Star</h2>
+            <p>-It takes about 8 minutes for the sunlight to go from the Sun to Earth</p>
+            <p>-The Sun is roughly 109x wider than the Earth</p>
+            <p>-The Sun looks yellow but in reality it looks white in space</p>
+            <p>-The distance from the Sun to Earth is about 93 million miles</p>
+            <p>-The Sun has a diameter of 865,000 miles</p>
+        </div>
     </div>
-    
-  </nav>
+ 
+    <div class="row">
+        <div class="textbox">
+            <h2>How the Sun Shines</h2>
+            <p>Deep inside the Sun, hydrogen atoms are squeezed together to make helium. This is called nuclear fusion, and it releases huge amounts of energy as light and heat. Every second, the Sun turns about 4 million tonnes of matter into energy. It has enough fuel to keep shining for about another 5 billion years.</p>
+        </div>
+        <div class="pic">
+            <img src="images/sun2.jpg" alt="The Sun's surface">
+        </div>
+    </div>
+ 
+    <h1 class="layers-title">Layers of the Sun</h1>
+ 
+    <div class="layers-row">
+ 
+        <div class="layered-sun">
+            <div class="layer corona" onclick="showLayer(0)"></div>
+            <div class="layer photosphere" onclick="showLayer(1)"></div>
+            <div class="layer convective" onclick="showLayer(2)"></div>
+            <div class="layer radiative" onclick="showLayer(3)"></div>
+            <div class="layer core" onclick="showLayer(4)"></div>
+        </div>
+ 
+        <div class="layer-info">
+ 
+            <h2 class="info-name">Pick a layer</h2>
+            <p class="info-temp"></p>
+            <p class="info-desc">Click a layer of the Sun to learn about it.</p>
+        </div>
+ 
+    </div>
+ 
+    </div>
+ 
+    <script>
+ 
+        let names = [
+            "The Corona",
+            "The Photosphere",
+            "The Convective Zone",
+            "The Radiative Zone",
+            "The Core"
+        ];
+ 
+        let temps = [
+            "Over 1,000,000 °C",
+            "About 5,500 °C",
+            "About 2,000,000 °C at the bottom",
+            "About 2,000,000 to 7,000,000 °C",
+            "About 15,000,000 °C"
+        ];
+ 
+        let descriptions = [
+            "The Sun's outer atmosphere. It is much hotter than the surface, and we can see it as a glowing halo during a total solar eclipse.",
+            "The visible surface of the Sun. Almost all of the sunlight we see comes from this thin layer.",
+            "Hot gas rises to the top, cools down, and sinks back again, a bit like boiling water in a pot.",
+            "Energy moves outward as light. It bounces around so much that it can take tens of thousands of years to get through this layer.",
+            "The center of the Sun. Hydrogen is fused into helium here, which makes all of the Sun's energy."
+        ];
+ 
+        function showLayer(i) {
+ 
+            let layers = document.querySelectorAll(".layer");
+ 
+            for (let j = 0; j < layers.length; j++) {
+                layers[j].classList.remove("selected");
+            }
+            layers[i].classList.add("selected");
+ 
+            document.querySelector(".info-name").textContent = names[i];
+            document.querySelector(".info-temp").textContent = temps[i];
+            document.querySelector(".info-desc").textContent = descriptions[i];
+        }
+ 
+    </script>
+ 
+</body>
+</html>
