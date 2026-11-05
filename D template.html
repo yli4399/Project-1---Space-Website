@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jupiter</title>
+
+  <style>
+
+    /* 
+      1. PAGE
+      The page itself: spacing, default font and the space picture behind everything. 
+    */
+    body
+    {
+      margin: 0;
+      padding-top: 60px;                /* leaves room for the fixed navbar */
+      font-family: sans-serif;
+      background-color: #E96439;        /* backup colour, shown if the picture fails to load */
+      background-image: url("Images/spacebox.jpg");
+      background-size: cover;           /* fills the screen, crops the edges */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* the picture stays still while the page scrolls */
+    }
+
+
+    /* 
+      2. TOP BARS
+      The navbar (site name + links) and the coloured banner under it that holds the page title.
+    */
+
+    /* navbar: dark bar pinned to the very top */
+    .navbar
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #0a0a0f;
+      border-bottom: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;   /* site name on the left, links on the right */
+      padding: 0 30px;
+      box-sizing: border-box;
+      z-index: 10;                      /* stays above the banner */
+    }
+
+    /* the row of planet links (scrolls sideways if the screen is too narrow) */
+    .links
+    {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .navbar a
+    {
+      color: rgb(248, 248, 248);
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    .navbar a:hover
+    {
+      color: #4da3ff;
+    }
+
+    /* banner: the colored band under the navbar that holds the page title */
+    header
+    {
+      position: fixed;
+      top: 40px;                        /* part of it sits behind the navbar */
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #6b3b34;
+      display: flex;
+      align-items: flex-end;            /* title near the bottom of the band */
+      justify-content: flex-start;      /* title on the left */
+      padding-left: 30px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      z-index: 5;                       /* lower than the navbar's 10 */
+    }
+
+    /* title text: used by both the navbar name and the banner title.
+       To make only the banner title bigger, add:  header > .logo { font-size: 40px; } */
+    .logo
+    {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+
+    /*
+      3. LAYOUT
+      A "feature" is one row on the page. Items in the row sit at the far left 
+      and far right and spread out with the screen.
+    */
+    .feature
+    {
+      display: flex;
+      justify-content: space-between;   /* first item at the left edge, last at the right edge */
+      gap: 3vw;                         /* space between items, grows with the screen */
+      flex-wrap: wrap;                  /* items stack on narrow screens */
+      padding: 0 4vw;                   /* side space, grows with the screen */
+    }
+
+
+    /*
+      4. BOXES
+      The three text boxes: facts box, second facts box and the
+      wide calculator box.
+    */
+
+    /* look for box(s) */
+    .box
+    {
+      background: #E96439;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    /* size of the fact box(es): takes about half the row */
+    .feature .box
+    {
+      flex: 1 1 45%;
+      min-width: 0;
+      min-height: clamp(350px, 32vw, 800px);   /* smallest, grows with the screen, largest */
+    }
+
+    /* spacing around each box: top, sides, bottom */
+    .feature .box  { margin: 100px 0 20px; }
+
+
+    /* headings inside the box(s) */
+    .box h2
+    {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2vw, 40px);
+    }
+
+    /* paragraph text inside the facts boxes */
+    .box p
+    {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(16px, 1.2vw, 26px);
+    }
+
+
+    /*
+      5. PICTURES AND CAPTIONS
+      A picture and its caption are wrapped in a <figure>.
+    */
+
+    /* the pictures: fill their column and keep their shape */
+    .feature .photo
+    {
+      display: block;                   /* removes the small gap under the picture */
+      width: 100%;
+      height: auto;
+      aspect-ratio: 650 / 400;
+      object-fit: cover;                /* fills the space, crops the edges instead of stretching */
+      border-radius: 14px;
+    }
+
+    /* the planet is round, so show all of it on a black background */
+    .feature .photo.planet
+    {
+      object-fit: contain;
+      background: #000;
+    }
+
+    /* remove the browser's default spacing around figures */
+    .feature figure
+    {
+      margin: 0;
+    }
+
+    /*           
+    
+    
+    
+    */
+    
+
+    /* text under each picture */
+    .feature figcaption
+    {
+      color: #fff;
+      font-size: clamp(18px, 2vw, 32px);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /*
+      6. FONTS
+      Which text uses the serif font. Everything else uses the
+      sans-serif font set on the body.
+    */
+    .box p,
+    .feature figcaption
+    {
+      font-family: Georgia, serif;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ===== TOP BARS: navbar with planet links, plus the page title banner ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="Testing.html">The Solar System</a>
+      <div class="links">
+        <a href="sun.html">Sun</a>
+        <a href="moon.html">Moon</a>
+        <a href="mercury.html">Mercury</a>
+        <a href="venus.html">Venus</a>
+        <a href="earth.html">Earth</a>
+        <a href="mars.html">Mars</a>
+        <a href="jupiter.html">Jupiter</a>
+        <a href="saturn.html">Saturn</a>
+        <a href="uranus.html">Uranus</a>
+        <a href="neptune.html">Neptune</a>
+      </div>
+    </nav>
+    <span class="logo">Mars</span>
+  </header>
+
+
+  <main>
+
+    <!-- ===== ROW 1: facts box on the left, planet picture on the right ===== -->
+    <div class="feature">
+      <div class="box">
+        <h2>Facts about Jupiter!</h2>
+        <p>
+          <br>
+        </p>
+      </div>
+    </div>
+
+
+  </main>
+
+
+  <script>
+  </script>
+
+</body>
+</html>

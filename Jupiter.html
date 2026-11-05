@@ -1,0 +1,372 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Jupiter</title>
+
+  <style>
+
+    /*
+      1. PAGE
+      The page itself: spacing, default font and the space picture behind everything.
+    */
+    body
+    {
+      margin: 0;
+      padding-top: 60px;                /* leaves room for the fixed navbar */
+      font-family: sans-serif;
+      background-color: #dd7d22;        /* backup colour, shown if the picture fails to load */
+      background-image: url("Images/spacebox.jpg");
+      background-size: cover;           /* fills the screen, crops the edges */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* the picture stays still while the page scrolls */
+    }
+
+
+    /*
+      2. TOP BARS
+      The navbar (site name + links) and the coloured banner under it that holds the page title.
+    */
+
+    /* navbar: dark bar pinned to the very top */
+    .navbar
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #0a0a0f;
+      border-bottom: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;   /* site name on the left, links on the right */
+      padding: 0 30px;
+      box-sizing: border-box;
+      z-index: 10;                      /* stays above the banner */
+    }
+
+    /* the row of planet links (scrolls sideways if the screen is too narrow) */
+    .links
+    {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .navbar a
+    {
+      color: rgb(248, 248, 248);
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    .navbar a:hover
+    {
+      color: #4da3ff;
+    }
+
+    /* banner: the coloured band under the navbar that holds the page title */
+    header
+    {
+      position: fixed;
+      top: 40px;                        /* part of it sits behind the navbar */
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #dd7d22;
+      display: flex;
+      align-items: flex-end;            /* title near the bottom of the band */
+      justify-content: flex-start;      /* title on the left */
+      padding-left: 30px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      z-index: 5;                       /* lower than the navbar's 10 */
+    }
+
+    /* title text: used by both the navbar name and the banner title.
+       To make only the banner title bigger, add:  header > .logo { font-size: 40px; } */
+    .logo
+    {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+
+    /*
+      3. LAYOUT
+      A "feature" is one row on the page. The row has the same side space (4vw) on the
+      left and right, and the same space (4vw) between its items.
+    */
+    .feature
+    {
+      display: flex;
+      justify-content: space-between;   /* first item at the left edge, last at the right edge */
+      gap: 4vw;                         /* space between items: same as the side space below */
+      flex-wrap: wrap;                  /* items stack on narrow screens */
+      padding: 0 4vw;                   /* side space on the left and right, grows with the screen */
+    }
+
+
+    /*
+      4. BOX
+      The facts box on the left side of the row.
+    */
+
+    /* look of the box */
+    .box
+    {
+      background: #7e6e55;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    /* size and spacing: stretches to fill the space between the left side and the pictures,
+       and is double the old height */
+    .feature .box
+    {
+      flex: 1 1 300px;                          /* width: grows to fill whatever the pictures leave free */
+      min-width: 0;
+      min-height: clamp(600px, 54vw, 1400px);     /* was clamp(700px, 64vw, 1600px) */
+      margin: 100px 0 20px;                     /* top, sides, bottom */
+    }
+
+    /* heading inside the box */
+    .box h2
+    {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2vw, 40px);
+    }
+
+    /* paragraph text inside the box */
+    .box p
+    {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(16px, 1.2vw, 26px);
+    }
+
+
+    /*
+      5. PICTURES AND CAPTIONS
+      The two pictures sit in a column on the right: one at the top, one at the bottom.
+      Each picture and its caption are wrapped in a <figure>.
+    */
+
+    /* the column that holds both pictures */
+    .feature .photo-column
+    {
+      flex: 0 1 36%;                    /* width: share of the row */
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;   /* first picture at the top, second at the bottom */
+      gap: 24px;                        /* smallest space between the two pictures */
+      margin: 100px 0 20px;             /* same top and bottom spacing as the box, so the edges line up */
+    }
+
+    /* remove the browser's default spacing around figures */
+    .feature figure
+    {
+      margin: 0;
+    }
+
+    /* the pictures: fill their column and keep their own shape (nothing is cropped) */
+    .feature .photo
+    {
+      display: block;                   /* removes the small gap under the picture */
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+    }
+
+    /* text under each picture */
+    .feature figcaption
+    {
+      color: #fff;
+      font-size: clamp(18px, 2vw, 32px);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    /* push the top right picture down a little */
+    .feature .photo-column figure:first-child
+    {
+      margin-top: 20px;       /* bigger number = lower */
+    }
+
+
+    /*
+      6. GREAT RED SPOT HOTSPOT
+      The pulsing circle on the Jupiter picture and the note it opens.
+      (The script that shows and hides the note is at the bottom of the page.)
+    */
+
+    /* wrapper so the circle and note can be placed on top of the picture */
+    .photo-wrap
+    {
+      position: relative;
+    }
+
+    /* the pulsing circle, placed over the Great Red Spot (left and top are percentages of the picture) */
+    .hotspot
+    {
+      position: absolute;
+      left: 61%;
+      top: 69%;
+      width: 11%;
+      aspect-ratio: 1;
+      transform: translate(-50%, -50%); /* centres the circle on that point */
+      padding: 0;
+      border: 3px solid #fff;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.15);
+      cursor: pointer;
+      animation: pulse 1.8s ease-in-out infinite;
+    }
+
+    .hotspot:hover
+    {
+      background: rgba(255, 255, 255, 0.35);
+    }
+
+    /* the ring slowly spreads out and fades, over and over */
+    @keyframes pulse
+    {
+      0%   { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0.7); }
+      70%  { box-shadow: 0 0 0 14px rgba(255, 255, 255, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 255, 255, 0); }
+    }
+
+    /* the note that appears on the picture when the circle is clicked */
+    .spot-note
+    {
+      position: absolute;
+      left: 3%;
+      right: 3%;
+      bottom: 3%;
+      margin: 0;
+      padding: 10px 14px;
+      background: rgba(0, 0, 0, 0.78);
+      color: #fff;
+      border-radius: 8px;
+      font-size: clamp(13px, 1vw, 18px);
+      line-height: 1.5;
+    }
+
+    .spot-note[hidden]
+    {
+      display: none;
+    }
+
+
+    /*
+      7. FONTS
+      Which text uses the serif font. Everything else uses the
+      sans-serif font set on the body.
+    */
+    /* banner title and everything below it will use Impact */
+    header > .logo,
+    .box h2,
+    .box p,
+    .feature figcaption,
+    .spot-note
+    {
+      font-family: Impact, sans-serif;
+      font-weight: normal; 
+    }
+      </style>
+    </head>
+
+
+<body>
+
+  <!-- ===== TOP BARS: navbar with planet links, plus the page title banner ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="Testing.html">The Solar System</a>
+      <div class="links">
+        <a href="sun.html">Sun</a>
+        <a href="moon.html">Moon</a>
+        <a href="mercury.html">Mercury</a>
+        <a href="venus.html">Venus</a>
+        <a href="earth.html">Earth</a>
+        <a href="mars.html">Mars</a>
+        <a href="jupiter.html">Jupiter</a>
+        <a href="saturn.html">Saturn</a>
+        <a href="uranus.html">Uranus</a>
+        <a href="neptune.html">Neptune</a>
+      </div>
+    </nav>
+    <span class="logo">Jupiter</span>
+  </header>
+
+
+  <main>
+
+    <!-- ===== ROW 1: facts box on the left, two pictures stacked on the right ===== -->
+    <div class="feature">
+
+      <!-- facts box: type the facts between the p tags -->
+      <div class="box">
+        <h2>Facts about Jupiter!</h2>
+        <p>
+          <br>
+          - Jupiter is the largest planet in our solar system, with a diameter of about 86,881 miles (139,822 kilometers). <br><br>
+          - It is a gas giant, meaning it is primarily composed of hydrogen and helium, with no solid surface. <br><br>
+          - Jupiter has at least 79 moons, with the four largest being the Galilean moons: Io, Europa, Ganymede, and Callisto. <br><br>
+          - The planet has a strong magnetic field, which is about 20,000 times stronger than Earth's. <br><br>
+          - Jupiter's atmosphere is known for its colorful bands and the Great Red Spot, a massive storm that has been raging for centuries. <br><br>
+          - It takes about 12 Earth years for Jupiter to complete one orbit around the Sun. <br><br>
+          - The planet has a faint ring system, which is not as prominent as Saturn's rings. <br><br>
+          - Jupiter's gravity is so strong that it has a significant influence on the orbits of other planets and objects in the solar system. <br><br>
+          - The planet emits more heat than it receives from the Sun, due to the slow contraction of its interior. <br><br>
+          - Jupiter has been visited by several spacecraft, including Pioneer 10 and 11, Voyager 1 and 2, Galileo, and Juno, which is currently studying the planet.
+        </p>
+      </div>
+
+      <!-- right column: planet picture at the top, size comparison at the bottom -->
+      <div class="photo-column">
+
+        <figure>
+          <div class="photo-wrap">
+            <img class="photo" src="Images/jupiterplanet.png" alt="The planet Jupiter with its Great Red Spot">
+            <button class="hotspot" id="spot-btn" aria-label="Show a fact about the Great Red Spot" aria-expanded="false"></button>
+            <p class="spot-note" id="spot-note" hidden>The Great Red Spot is a giant storm slightly wider than Earth. Astronomers have been watching it for over 150 years.</p>
+          </div>
+          <figcaption>The planet Jupiter (click the circle!)</figcaption>
+        </figure>
+
+        <figure>
+          <img class="photo" src="Images/jupitersize.png" alt="Jupiter, Saturn, Uranus, Neptune, Earth, Venus, Mars and Mercury shown side by side to scale">
+          <figcaption>Jupiter compared to the other planets</figcaption>
+        </figure>
+
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ===== SCRIPT: Great Red Spot hotspot ===== -->
+  <script>
+    const spotButton = document.getElementById("spot-btn");
+    const spotNote   = document.getElementById("spot-note");
+
+    // runs every time the circle is clicked: show the note, or hide it if it is already showing
+    spotButton.addEventListener("click", function ()
+    {
+      const wasHidden = spotNote.hidden;
+
+      spotNote.hidden = !wasHidden;
+      spotButton.setAttribute("aria-expanded", String(wasHidden));
+    });
+  </script>
+
+</body>
+</html>
