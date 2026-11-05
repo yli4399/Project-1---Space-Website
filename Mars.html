@@ -135,10 +135,14 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; }
 }
 
 /* boxes: same size and vertical spacing as before */
-.feature .box,
+.feature .box {
+  flex: 0 1 600px;
+  margin: 100px 0 20px;       /* top 100, sides 0, bottom 20 */
+}
+
 .feature .box2 {
-  flex: 0 1 600px;                  /* 600px wide, shrinks on small screens */
-  margin: 100px 0 60px;             /* top 100, bottom 60, sides handled by the row */
+  flex: 0 1 600px;
+  margin: 30px 0 60px;        /* top 30, sides 0, bottom 60 */
 }
 
 /* planet (picture + caption): top right */
@@ -249,6 +253,17 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; }
 .box h2, .box2 h2, .wide-box h2 { font-size: clamp(22px, 2vw, 40px); }
 .box p, .box2 p { font-size: clamp(16px, 1.2vw, 26px); }
 .feature figcaption { font-size: clamp(18px, 2vw, 32px); }
+
+.box p,
+.box2 p,
+.box li,
+.box2 li,
+.logo,
+.wide-box,
+.wide-box input,
+.feature figcaption {
+  font-family: Georgia, serif;
+}
   </style>
   <!-- <link rel="stylesheet" href="style.css"> -->
 </head>
@@ -277,8 +292,16 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; }
   <!-- first box on the left, planet picture at the top right -->
   <div class="feature">
     <div class="box">
-      <h2>Mars</h2>
-      <p>Type your text here.</p>
+      <h2> 
+          Facts about Mars!
+        </h2>
+      <p>
+        <br>
+        - Mars is the 4th planet from the sun, measuring a distance of about 142 million miles. <br> <br>
+        - Mars is known as the "red planet" due to the iron on mars rusting, giving it its reddish look. <br> <br>
+        - According to NASA, the average temperature on Mars is about -80°F - 85°F, this is because Mars' atmosphere is about 100x thinner than Earths and because of its distance from the sun <br><br>
+        - A day on Mars is only slightly longer than Earth's, being about 24 hours and 37 minutes
+      </p>
     </div>
     <figure class="planet-fig">
       <img class="photo planet" src="Images/marsplanet.png" alt="The planet Mars">
@@ -293,19 +316,27 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; }
       <figcaption>The Perseverance rover</figcaption>
     </figure>
     <div class="box2">
-      <h2>Second box</h2>
-      <p>Text here.</p>
+      <h2> 
+          MORE facts about Mars!
+        </h2>
+      <p>
+        <br>
+        - Mars has 2 moons that orbit it called Phobos and Deimos <br><br>
+        - Mars contains the largest volcano in the solar system named Olympus Mons, formed through the slow, continuous accumulation of basaltic lava from a hot spot over 1 billion years. <br><br>
+        - Scientists have found evidence of ancient rivers and lakes on Mars, indicating that there was once water on the planet. <br><br>
+        - Mars is currently the only planet excluding Earth ot have space rovers roaming on it, the most recent one is named Perserverence, landing on February 18th, 2021.
+      </p>
     </div>
   </div>
 
   <!-- wide box under the second box: multiplies a number -->
   <div class="feature">
     <div class="wide-box">
-      <h2>Multiplier</h2>
-      <label for="num">Enter a number</label>
-      <input id="num" type="number" step="any" placeholder="Type a number">
-      <p class="result">Result: <span id="result">-</span></p>
-      <p class="note">Your number is multiplied by <span id="mult"></span></p>
+      <h2>How much would you weigh on Mars?</h2>
+      <label for="num">Enter your weight</label>
+      <input id="num" type="number" step="any" placeholder="Enter your weight">
+      <p class="result">Your weight on Mars: <span id="result"></span></p>
+      <p class="note">Mars' gravity is only 38% of Earth's gravity</p>
     </div>
   </div>
 
@@ -316,20 +347,19 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; }
   </footer>
 
   <script>
-    const MULTIPLIER = 2.4;   // placeholder: change this number to whatever you want to multiply by
+    const MULTIPLIER = .38;   // placeholder: change this number to whatever you want to multiply by
 
     const input  = document.getElementById("num");
     const result = document.getElementById("result");
-    document.getElementById("mult").textContent = MULTIPLIER;
 
     // runs every time the number in the box changes
     input.addEventListener("input", function () {
       const value = parseFloat(input.value);
       if (isNaN(value)) {
-        result.textContent = "-";          // nothing typed yet
+        result.textContent = "";          // nothing typed yet
       } else {
         // toFixed(6) then Number() removes long decimals like 7.199999999
-        result.textContent = Number((value * MULTIPLIER).toFixed(6));
+        result.textContent = Number((value * MULTIPLIER).toFixed(6)) + " lbs";
       }
     });
   </script>
