@@ -1,0 +1,442 @@
+<!doctype html>
+<html>
+<head>
+<style>
+  html {
+    scroll-snap-type: y mandatory;  
+    scroll-padding-top: 60px;      
+    scroll-behavior: smooth;
+  }
+  body { margin: 0; padding-top: 60px; font-family: sans-serif; background: #000; }
+ 
+  .navbar {
+    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+    background: #0a0a0f; border-bottom: 1px solid #2a2a35;
+    display: flex; align-items: center;
+    justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+    z-index: 10;
+  }
+  .links { display: flex; overflow-x: auto; white-space: nowrap; }
+  .navbar a { color: rgb(248, 248, 248); text-decoration: none; margin-left: 30px; }
+  .navbar a:hover { color: #4da3ff; }
+  .logo { color: white; font-weight: bold; font-size: 20px; }
+ 
+  .info, .panels, .about, .system {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;       
+    height: calc(100vh - 60px);
+    box-sizing: border-box;
+  }
+ 
+.info {
+  display: flex;
+  align-items: center;
+  gap: 50px;
+  padding: 40px;
+  color: white;
+  background:
+    linear-gradient(rgba(0, 0, 0, 0.65), rgba(0, 0, 0, 0.65)),
+    url(images/bigbang-bg.jpg) center / cover no-repeat;  
+}
+.info-text {
+  flex: 1;
+  max-height: 100%;
+  overflow-y: auto;
+  padding-right: 10px;
+}
+.info h1 { font-size: clamp(36px, 7vw, 80px); margin: 0 0 16px; }
+.info p { color: #ddd; font-size: 20px; max-width: 700px; margin: 0 0 20px; }
+
+.info-img {
+  flex: 0 0 50%;
+  max-width: 45%;
+  max-height: 100%;
+  object-fit: cover;
+  border-radius: 14px;
+  margin-right: 80px;
+}
+
+  .about h2 { font-size: clamp(28px, 4vw, 48px); margin: 0 0 16px; }
+ 
+  
+  .panels {
+    display: flex;
+    gap: 6px;
+    padding: 6px;
+    background: #000;
+  }
+
+  .panel {
+    flex: 1;
+    background-color: #000;
+    background-size: auto 70%;     
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border-radius: 14px;
+    text-decoration: none;
+    transition: flex 0.6s ease, filter 0.4s ease, background-size 0.6s ease;
+  }
+ 
+  .panels:hover .panel:not(:hover) { filter: brightness(0.55); }
+  .panel:hover { flex: 6; background-size: auto 100%; }
+ 
+  .panel span {
+    position: absolute; bottom: 30px; left: 50%;
+    writing-mode: vertical-rl;
+    transform: translateX(-50%) rotate(180deg);
+    white-space: nowrap;
+    color: white; font-size: 16px; font-weight: bold;
+    letter-spacing: 4px; text-transform: uppercase;
+    text-shadow: 0 2px 6px black;
+  }
+  .panel:hover span {
+    writing-mode: horizontal-tb;
+    transform: translateX(-50%);
+    font-size: 26px;
+  }
+ 
+  .sun     { background-image: url(images/sun.jpg); background-size: cover; }
+  .sun:hover { background-size: cover; }
+  .moon    { background-image: url(images/moon.jpg); }
+  .mercury { background-image: url(images/mercury.jpg); }
+  .venus   { background-image: url(images/venus.jpg); }
+  .earth   { background-image: url(images/earth.jpg); }
+  .mars    { background-image: url(images/mars.jpg); }
+  .jupiter { background-image: url(images/jupiter.jpg); background-size: auto 85%; }
+  .saturn  { background-image: url(images/saturn.jpg);  background-size: auto 100%; background-position: 55% center; }
+  .uranus  { background-image: url(images/uranus.jpg);  background-size: auto 92%; }
+  .neptune { background-image: url(images/neptune.jpg); }
+
+  .system {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #000;
+    overflow: hidden;
+    position: relative;
+  }
+
+  .solar-system {
+    width: 800px;
+    height: 800px;
+    position: relative;
+    flex: none;
+  }
+
+  /* The Sun */
+  .sun-star {
+    width: 80px;
+    height: 80px;
+    background-color: gold;
+    border-radius: 50%;
+
+    position: absolute;
+    top: 360px;
+    left: 360px;
+
+    box-shadow: 0 0 30px orange;
+    cursor: pointer;
+  }
+
+  .orbit {
+    position: absolute;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 50%;
+    pointer-events: none;
+  }
+  .orbit:hover { z-index: 5; }
+
+  .mercury-orbit {
+    width: 140px; height: 140px;
+    top: 330px; left: 330px;
+    animation: orbit 8s linear infinite;
+    animation-delay: -1s;
+  }
+
+  .venus-orbit {
+    width: 220px; height: 220px;
+    top: 290px; left: 290px;
+    animation: orbit 14s linear infinite;
+    animation-delay: -5s;
+  }
+
+  .earth-orbit {
+    width: 300px; height: 300px;
+    top: 250px; left: 250px;
+    animation: orbit 20s linear infinite;
+    animation-delay: -9s;
+  }
+
+  .mars-orbit {
+    width: 380px; height: 380px;
+    top: 210px; left: 210px;
+    animation: orbit 28s linear infinite;
+    animation-delay: -3s;
+  }
+
+  .jupiter-orbit {
+    width: 480px; height: 480px;
+    top: 160px; left: 160px;
+    animation: orbit 45s linear infinite;
+    animation-delay: -20s;
+  }
+
+  .saturn-orbit {
+    width: 570px; height: 570px;
+    top: 115px; left: 115px;
+    animation: orbit 60s linear infinite;
+    animation-delay: -35s;
+  }
+
+  .uranus-orbit {
+    width: 670px; height: 670px;
+    top: 65px; left: 65px;
+    animation: orbit 80s linear infinite;
+    animation-delay: -10s;
+  }
+
+  .neptune-orbit {
+    width: 770px; height: 770px;
+    top: 15px; left: 15px;
+    animation: orbit 100s linear infinite;
+    animation-delay: -60s;
+  }
+
+  .planet {
+    position: absolute;
+    border-radius: 50%;
+    top: 0;
+    left: 50%;
+    translate: -50% -50%;
+    pointer-events: auto;
+    cursor: pointer;
+  }
+
+  .planet::before {
+    content: "";
+    position: absolute;
+    inset: -10px;
+  }
+
+
+  .mercury-planet { width: 12px; height: 12px; background-color: gray;    animation: counter-orbit 8s linear infinite;   animation-delay: -1s; }
+  .venus-planet   { width: 18px; height: 18px; background-color: orange;  animation: counter-orbit 14s linear infinite;  animation-delay: -5s; }
+  .earth-planet   { width: 20px; height: 20px; background-color: blue;    animation: counter-orbit 20s linear infinite;  animation-delay: -9s; }
+  .mars-planet    { width: 16px; height: 16px; background-color: red;     animation: counter-orbit 28s linear infinite;  animation-delay: -3s; }
+  .jupiter-planet { width: 40px; height: 40px; background-color: tan;     animation: counter-orbit 45s linear infinite;  animation-delay: -20s; }
+  .saturn-planet  { width: 34px; height: 34px; background-color: #e6d29a; animation: counter-orbit 60s linear infinite;  animation-delay: -35s; }
+  .uranus-planet  { width: 26px; height: 26px; background-color: #8fe3e8; animation: counter-orbit 80s linear infinite;  animation-delay: -10s; }
+  .neptune-planet { width: 24px; height: 24px; background-color: #3f5fe0; animation: counter-orbit 100s linear infinite; animation-delay: -60s; }
+
+  /* The name label that shows on hover */
+  .planet span, .sun-star span {
+    position: absolute;
+    left: 140%;
+    top: 50%;
+    translate: 0 -50%;
+    padding: 4px 10px;
+    background: rgba(10, 10, 15, 0.9);
+    border: 1px solid #2a2a35;
+    border-radius: 8px;
+    color: white;
+    font-size: 14px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s;
+  }
+  .sun-star span { left: 105%; }
+  .planet:hover span, .sun-star:hover span { opacity: 1; }
+  .planet span small {
+    display: block;
+    margin-top: 2px;
+    color: #aaa;
+    font-size: 12px;
+  }
+
+  /* Hovering pauses that planet */
+  .orbit:hover, .orbit:hover .planet { animation-play-state: paused; }
+
+  /* Makes the planets orbit */
+  @keyframes orbit {
+    from { rotate: 0deg; }
+    to   { rotate: 360deg; }
+  }
+  @keyframes counter-orbit {
+    from { rotate: 0deg; }
+    to   { rotate: -360deg; }
+  }
+
+  /* Text on the left side */
+  .system-text {
+    position: absolute;
+    left: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 330px;
+    color: white;
+  }
+  .system-text h1 {
+    font-size: 48px;
+    margin: 0 0 20px;
+  }
+  .system-text p {
+    color: #ddd;
+    font-size: 18px;
+    margin: 0;
+  }
+
+  /* Pause all animations */
+  .paused {
+    animation-play-state: paused !important;
+  }
+
+  /* The button, on the right side */
+  button {
+    background-color: lightblue;
+    position: absolute;
+    right: 50px;
+    top: 50%;
+    width: 200px;
+    height: 70px;
+    font-size: 24px;
+    cursor: pointer;
+  }
+
+</style>
+</head>
+<body>
+  <nav class="navbar">
+    <span class="logo">The Solar System</span>
+    <div class="links">
+      <a href="sun.html">Sun</a>
+      <a href="moon.html">Moon</a>
+      <a href="mercury.html">Mercury</a>
+      <a href="venus.html">Venus</a>
+      <a href="earth.html">Earth</a>
+      <a href="mars.html">Mars</a>
+      <a href="jupiter.html">Jupiter</a>
+      <a href="saturn.html">Saturn</a>
+      <a href="uranus.html">Uranus</a>
+      <a href="neptune.html">Neptune</a>
+    </div>
+  </nav>
+ 
+  <!-- section 1 -->
+  <div class="panels">
+    <a class="panel sun" href="sun.html"><span>The Sun</span></a>
+    <a class="panel moon" href="moon.html"><span>The Moon</span></a>
+    <a class="panel mercury" href="mercury.html"><span>Mercury</span></a>
+    <a class="panel venus" href="venus.html"><span>Venus</span></a>
+    <a class="panel earth" href="earth.html"><span>Earth</span></a>
+    <a class="panel mars" href="mars.html"><span>Mars</span></a>
+    <a class="panel jupiter" href="jupiter.html"><span>Jupiter</span></a>
+    <a class="panel saturn" href="saturn.html"><span>Saturn</span></a>
+    <a class="panel uranus" href="uranus.html"><span>Uranus</span></a>
+    <a class="panel neptune" href="neptune.html"><span>Neptune</span></a>
+  </div>
+ 
+  <!-- section 2 -->
+  <section class="info">
+  <div class="info-text">                    
+    <h1>The Big Bang</h1>
+    <p>This theory is what we believe to be the beginning of our Universe. The Big Bang is a physical theory that describes how the universe expanded from an early state of high density and temperature. Various cosmological models based on the Big Bang concept explain a broad range of phenomena, including the abundance of light elements, the cosmic microwave background (CMB) radiation, the redshift of galaxies and the large-scale structure of the universe. The observed uniformity of the universe, which leads to the horizon and flatness problems, is explained through cosmic inflation: a phase of accelerated expansion during the earliest stages. Detailed measurements of the expansion rate of the universe place the cosmic inflation at an estimated 13.787±0.02 billion years ago, which is considered the age of the universe. A wide range of empirical evidence strongly favors the Big Bang model, which is now widely accepted.</p>
+    <p>Extrapolating this cosmic expansion backward in time using the known laws of physics, the models describe an extraordinarily hot and dense primordial universe. The original Big Bang model extrapolated the universe back towards a Big Bang singularity. However, the modern view incorporates inflationary cosmology, whereby the universe emerged out of inflation in a supercooled state. This was followed by a reheating event that converted the energy that drove inflation into a hot and dense plasma, initiating the hot Big Bang. As the universe expanded, it cooled sufficiently to allow the formation of subatomic particles, and later atoms. These primordial elements—mostly hydrogen, with some helium and lithium—then coalesced under the force of gravity aided by dark matter, forming early stars and galaxies. Measurements of the redshifts of supernovae indicate that the expansion of the universe is accelerating, an observation attributed to a concept called dark energy</p>
+    <p>The concept of an expanding universe was introduced by the physicist Alexander Friedmann in 1922 with the mathematical derivation of the Friedmann equations. The earliest empirical observation of an expanding universe is known as Hubble’s law, published in work by physicist Edwin Hubble in 1929, which discerned that galaxies are moving away from Earth at a rate that accelerates proportionally with distance. Independent of Friedmann’s work, and independent of Hubble’s observations, in 1931 physicist Georges Lemaître proposed that the universe emerged from a “primeval atom”, introducing the modern notion of the Big Bang. In 1964, the CMB was accidentally discovered. Over the next few years measurements showed this radiation to be uniform over directions in the sky and the shape of the energy versus intensity curve, both consistent with the Big Bang models of high temperatures and densities in the distant past. By the late 1960s most cosmologists were convinced that the competing steady-state model of cosmic evolution was incorrect.</p>
+  </div>                                      
+  <img class="info-img" src="images/bigbang.jpg" alt="The Big Bang">
+</section>
+
+  <!-- section 3 -->
+  <section class="system">
+    <div class="system-text">
+      <h1>Solar System</h1>
+      <p>The Solar System is the gravitationally bound system of the Sun and the masses that orbit it, most prominently its eight planets, of which Earth is one. The Solar System is an isolated single-star planetary system (not part of a larger star system) within the Milky Way Galaxy. The system formed about 4.6 billion years ago when a dense region of a molecular cloud collapsed, creating the Sun and a protoplanetary disc from which the orbiting bodies assembled.
+
+The Sun accounts for 99.86% of the Solar System's total mass. Inside the Sun's core, hydrogen is fused into helium, releasing energy that is emitted through the Sun's photosphere. This creates the heliosphere and a decreasing temperature gradient across the Solar System.</p>
+    </div>
+
+    <div class="solar-system">
+
+      <div class="sun-star"><span>The Sun</span></div>
+
+      <div class="orbit mercury-orbit">
+        <div class="planet mercury-planet"><span>Mercury<small>88 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit venus-orbit">
+        <div class="planet venus-planet"><span>Venus<small>225 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit earth-orbit">
+        <div class="planet earth-planet"><span>Earth<small>365 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit mars-orbit">
+        <div class="planet mars-planet"><span>Mars<small>687 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit jupiter-orbit">
+        <div class="planet jupiter-planet"><span>Jupiter<small>4,333 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit saturn-orbit">
+        <div class="planet saturn-planet"><span>Saturn<small>10,759 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit uranus-orbit">
+        <div class="planet uranus-planet"><span>Uranus<small>30,687 days per loop</small></span></div>
+      </div>
+
+      <div class="orbit neptune-orbit">
+        <div class="planet neptune-planet"><span>Neptune<small>60,190 days per loop</small></span></div>
+      </div>
+
+    </div>
+
+    <button onclick="toggleAnimate()">Stop Animation</button>
+  </section>
+
+  <script>
+
+    let animationRunning = true;
+
+    function toggleAnimate() {
+
+        let orbits = document.querySelectorAll(".orbit"); //array
+        let planets = document.querySelectorAll(".planet"); //array
+        let button = document.querySelector("button");
+
+        if (animationRunning) {
+
+            for (let i = 0; i < orbits.length; i++) {
+                orbits[i].classList.add("paused");
+            }
+            for (let i = 0; i < planets.length; i++) {
+                planets[i].classList.add("paused");
+            }
+
+            button.textContent = "Start Animation";
+            animationRunning = false;
+
+        } else {
+
+            for (let i = 0; i < orbits.length; i++) {
+                orbits[i].classList.remove("paused");
+            }
+            for (let i = 0; i < planets.length; i++) {
+                planets[i].classList.remove("paused");
+            }
+
+            button.textContent = "Stop Animation";
+            animationRunning = true;
+        }
+    }
+
+  </script>
+
+</body>
+</html>
