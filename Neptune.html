@@ -1,0 +1,436 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Neptune</title>
+  <style>
+
+    /*
+      1. PAGE
+      The page itself: spacing, default font and the space picture behind everything.
+    */
+    body
+    {
+      margin: 0;
+      padding-top: 60px;                /* leaves room for the fixed navbar */
+      font-family: sans-serif;
+      background-color: #5e92f5;        /* backup colour, shown if the picture fails to load */
+      background-image: url("Images/spacebox.jpg");
+      background-size: cover;           /* fills the screen, crops the edges */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* the picture stays still while the page scrolls */
+    }
+
+
+    /*
+      2. TOP BARS
+      The navbar (site name + links) and the coloured banner under it that holds the page title.
+    */
+
+    /* navbar: dark bar pinned to the very top */
+    .navbar
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #0a0a0f;
+      border-bottom: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;   /* site name on the left, links on the right */
+      padding: 0 30px;
+      box-sizing: border-box;
+      z-index: 10;                      /* stays above the banner */
+    }
+
+    /* the row of planet links (scrolls sideways if the screen is too narrow) */
+    .links
+    {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .navbar a
+    {
+      color: rgb(248, 248, 248);
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    .navbar a:hover
+    {
+      color: #4da3ff;
+    }
+
+    /* banner: the coloured band under the navbar that holds the page title */
+    header
+    {
+      position: fixed;
+      top: 40px;                        /* part of it sits behind the navbar */
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #5e92f5;
+      display: flex;
+      align-items: flex-end;            /* title near the bottom of the band */
+      justify-content: flex-start;      /* title on the left */
+      padding-left: 30px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      z-index: 5;                       /* lower than the navbar's 10 */
+    }
+
+    /* title text: used by both the navbar name and the banner title.
+       To make only the banner title bigger, add:  header > .logo { font-size: 40px; } */
+    .logo
+    {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+
+    /*
+      3. LAYOUT
+      A "feature" is one row on the page. Items in the row sit at the far left
+      and far right and spread out with the screen.
+    */
+    .feature
+    {
+      display: flex;
+      justify-content: space-between;   /* first item at the left edge, last at the right edge */
+      gap: 3vw;                         /* space between items, grows with the screen */
+      flex-wrap: wrap;                  /* items stack on narrow screens */
+      padding: 0 4vw;                   /* side space, grows with the screen */
+    }
+
+
+    /*
+      4. BOXES
+      The two facts boxes: the first on the left of row 1, the second on the right of row 2.
+    */
+
+    /* look of both boxes */
+    .box,
+    .box2
+    {
+      background: #5c8cd2;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 24px;
+    }
+
+    /* size of both boxes: a little narrower than before, so there is more space beside the pictures.
+       The first box stays on the left edge and the second on the right edge, so each one
+       gets shorter on the side that faces its picture. */
+    .feature .box,
+    .feature .box2
+    {
+      flex: 0 1 43.3%;                          /* width: share of the row (was 45%, then 40%; now two thirds of the way back) */
+      min-width: 0;
+      min-height: clamp(350px, 32vw, 800px);    /* smallest, grows with the screen, largest */
+    }
+
+    /* first box only: a little wider than the second, so it extends further to the right */
+    .feature .box  { flex-basis: 45%; }
+
+    /* spacing around each box: top, sides, bottom */
+    .feature .box  { margin: 100px 0 20px; }
+    .feature .box2 { margin: 30px 0 60px; }
+
+    /* headings inside the boxes */
+    .box h2,
+    .box2 h2
+    {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2vw, 40px);
+    }
+
+    /* paragraph text inside the boxes */
+    .box p,
+    .box2 p
+    {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(16px, 1.2vw, 26px);
+    }
+
+
+    /*
+      5. PICTURES AND CAPTIONS
+      A picture and its caption are wrapped in a <figure>.
+    */
+
+    /* the pictures: fill their column and keep their shape */
+    .feature .photo
+    {
+      display: block;                   /* removes the small gap under the picture */
+      width: 100%;
+      height: auto;
+      aspect-ratio: 650 / 400;
+      object-fit: cover;                /* fills the space, crops the edges instead of stretching */
+      border-radius: 14px;
+    }
+
+    /* the planet photo has a near-black background, so show all of it on that same colour
+       (#050505 matches the photo, so the side bars blend in with no visible edge) */
+    .feature .photo.planet
+    {
+      object-fit: contain;
+      background: #050505;
+    }
+
+    /* remove the browser's default spacing around figures */
+    .feature figure
+    {
+      margin: 0;
+    }
+
+    /* planet picture: top right, lined up with the top of the first box */
+    .feature .planet-fig
+    {
+      flex: 0 1 46%;
+      min-width: 0;
+      align-self: flex-start;           /* top of the row */
+      margin-top: 125px;
+    }
+
+    /* illustration: bottom left, lined up with the bottom of the second box */
+    .feature .art-fig
+    {
+      flex: 0 1 46%;
+      min-width: 0;
+      align-self: flex-end;             /* bottom of the row */
+      margin-bottom: 116px;
+    }
+
+    /* text under each picture */
+    .feature figcaption
+    {
+      color: #fff;
+      font-size: clamp(18px, 2vw, 32px);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+
+    /*
+      6. FONTS
+      The Pixelywave Tech Future font is used for the banner title and everything below it.
+      The navbar (the site name and planet links) keeps the default sans-serif font set on the body.
+      The font file goes in a folder called Fonts, next to this HTML file.
+    */
+    @font-face
+    {
+      font-family: "PixelywaveTechFuture";
+      src: url("Fonts/PixelywaveTechFuture-7OdJw.otf") format("opentype");
+      font-display: swap;               /* show the backup font until the new font has loaded */
+    }
+
+    header > .logo,
+    .box h2,
+    .box2 h2,
+    .box p,
+    .box2 p,
+    .feature figcaption
+    {
+      font-family: "PixelywaveTechFuture", sans-serif;
+      font-weight: normal;              /* the font has one weight, so this stops the browser faking extra bold */
+    }
+
+
+    /*
+      7. DIAMOND RAIN
+      The clickable sentence in the first box, and the video that plays on top of the page.
+    */
+
+    /* the sentence you click: dotted underline and a highlight on hover so it looks clickable */
+    .diamond-trigger
+    {
+      cursor: pointer;
+      text-decoration: underline dotted;
+      text-underline-offset: 4px;
+    }
+
+    .diamond-trigger:hover
+    {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+    }
+
+    .diamond-trigger:focus-visible
+    {
+      outline: 3px solid #fff;          /* outline when reached with the keyboard */
+      outline-offset: 3px;
+      border-radius: 4px;
+    }
+
+    /* the video: pinned over the whole screen, hidden until it plays */
+    .rain-video
+    {
+      display: none;
+      position: fixed;                  /* stays on the screen when the page scrolls */
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;                /* fills the screen, crops the edges */
+      mix-blend-mode: screen;           /* the black background turns see-through, so only the diamonds show */
+      pointer-events: none;             /* clicks and scrolling pass through to the page */
+      z-index: 20;                      /* above the navbar (10) and the banner (5) */
+    }
+
+    .rain-video.playing
+    {
+      display: block;
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ===== TOP BARS: navbar with planet links, plus the page title banner ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="Testing.html">The Solar System</a>
+      <div class="links">
+        <a href="sun.html">Sun</a>
+        <a href="moon.html">Moon</a>
+        <a href="mercury.html">Mercury</a>
+        <a href="venus.html">Venus</a>
+        <a href="earth.html">Earth</a>
+        <a href="mars.html">Mars</a>
+        <a href="jupiter.html">Jupiter</a>
+        <a href="saturn.html">Saturn</a>
+        <a href="uranus.html">Uranus</a>
+        <a href="neptune.html">Neptune</a>
+      </div>
+    </nav>
+    <span class="logo">Neptune</span>
+  </header>
+
+
+  <main>
+    <!-- ===== ROW 1: facts box on the left, planet picture at the top right ===== -->
+    <div class="feature">
+      <div class="box">
+        <h2>Facts about Neptune!</h2>
+        <p>
+          <br>
+          - Neptune is the eighth and farthest known planet from the Sun. <br><br>
+          - Neptune is an ice giant, with a thick atmosphere of hydrogen, helium, and methane. <br><br>
+          - Neptune has a strong magnetic field and a system of rings, though they are faint and difficult to observe. <br><br>
+          - Neptune has 14 known moons, with Triton being the largest and most famous. <br><br>
+          - <span id="diamond-trigger" class="diamond-trigger" role="button" tabindex="0">It rains diamonds on Neptune!!!!!!</span>
+        </p>
+      </div>
+
+      <figure class="planet-fig">
+        <img class="photo planet" src="Images/neptuneplanet.png" alt="The planet Neptune">
+        <figcaption>The planet Neptune</figcaption>
+      </figure>
+    </div>
+
+
+    <!-- ===== ROW 2: illustration at the bottom left, second facts box on the right ===== -->
+    <div class="feature">
+      <figure class="art-fig">
+        <img class="photo" src="Images/neptuneplanet2.jpg" alt="The Planet Neptune in space">
+        <figcaption>The Planet Neptune in space</figcaption>
+      </figure>
+
+      <div class="box2">
+        <h2>MORE facts about Neptune!</h2>
+        <p>
+          <br>
+          - Neptune was discovered in 1846 by Johann Galle and Heinrich d'Arrest, based on predictions made by Urbain Le Verrier. <br><br>
+          - Neptune has the strongest winds in the solar system, with speeds reaching up to 2,100 km/h (1,300 mph). <br><br>
+          - Neptune's atmosphere contains methane, which gives it its characteristic blue color. <br><br>
+          - Neptune has a very long orbit, taking about 165 Earth years to complete one revolution around the Sun. <br><br>
+          - Neptune has a very cold surface, with average temperatures around -214°C (-353°F). <br><br>
+        </p>
+      </div>
+    </div>
+
+  </main>
+
+
+  <!-- ===== DIAMOND RAIN VIDEO: hidden until the sentence in the first box is clicked ===== -->
+  <video id="rain-video" class="rain-video" src="Images/diamondrain.mp4" preload="auto" playsinline aria-hidden="true"></video>
+
+
+  <!-- ===== SCRIPT: diamond rain (play the video, swap the top right picture, then swap it back) ===== -->
+  <script>
+    const trigger   = document.getElementById("diamond-trigger");   // the sentence you click
+    const rainVideo = document.getElementById("rain-video");
+    const planetImg = document.querySelector(".planet-fig .photo"); // the top right picture
+
+    // the normal picture, remembered so it can be put back afterwards
+    const normalSrc = planetImg.getAttribute("src");
+    const normalAlt = planetImg.getAttribute("alt");
+
+    // the picture shown while the video plays
+    const gemSrc = "Images/gem.png";
+    const gemAlt = "Two men sitting on a train, one looking at a phone and the other holding a magnifying glass";
+
+    // load the gem picture ahead of time so the swap is instant
+    const gemPreload = new Image();
+    gemPreload.src = gemSrc;
+
+    let isPlaying = false;              // stops a second click from restarting the video halfway
+
+    // show the video and swap in the gem picture
+    function startRain()
+    {
+      if (isPlaying) return;
+      isPlaying = true;
+
+      planetImg.src = gemSrc;
+      planetImg.alt = gemAlt;
+
+      rainVideo.classList.add("playing");
+      rainVideo.currentTime = 0;
+
+      const attempt = rainVideo.play();
+      if (attempt !== undefined)
+      {
+        attempt.catch(stopRain);        // if the browser refuses to play it, put everything back
+      }
+    }
+
+    // hide the video and put the normal picture back
+    function stopRain()
+    {
+      rainVideo.pause();
+      rainVideo.classList.remove("playing");
+
+      planetImg.src = normalSrc;
+      planetImg.alt = normalAlt;
+
+      isPlaying = false;
+    }
+
+    trigger.addEventListener("click", startRain);
+
+    // lets keyboard users start it with Enter or Space
+    trigger.addEventListener("keydown", function (event)
+    {
+      if (event.key === "Enter" || event.key === " ")
+      {
+        event.preventDefault();
+        startRain();
+      }
+    });
+
+    rainVideo.addEventListener("ended", stopRain);   // video finished
+    rainVideo.addEventListener("error", stopRain);   // video file missing or broken
+  </script>
+
+</body>
+</html>

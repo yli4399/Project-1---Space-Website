@@ -1,8 +1,6 @@
 <!doctype html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Saturn</title>
 
   <style>
@@ -11,12 +9,18 @@
       1. PAGE
       The page itself: spacing, default font and the space picture behind everything.
     */
+    @font-face /*registers the Orbitron font*/
+    {
+    font-family: "Orbitron";
+    src: url("fonts/Orbitron-Black.ttf") format("truetype");
+    }
+
     body
     {
       margin: 0;
       padding-top: 60px;                /* leaves room for the fixed navbar */
-      font-family: sans-serif;
-      background-color: #E96439;        /* backup colour, shown if the picture fails to load */
+      font-family: "Orbitron", sans-serif;
+      background-color: #7e6e55;        /* backup colour, shown if the picture fails to load */
       background-image: url("Images/spacebox.jpg");
       background-size: cover;           /* fills the screen, crops the edges */
       background-position: center;
@@ -76,7 +80,7 @@
       left: 0;
       width: 100%;
       height: 80px;
-      background: #6b3b34;
+      background: #d9c26f;
       display: flex;
       align-items: flex-end;            /* title near the bottom of the band */
       justify-content: flex-start;      /* title on the left */
@@ -93,6 +97,18 @@
       font-size: 20px;
     }
 
+    .navbar .logo 
+    {
+    font-family: sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    color: white;
+    }
+
+    header > .logo 
+    {
+    font-family: "Orbitron", sans-serif;
+    }
 
     /*
       3. LAYOUT
@@ -149,7 +165,7 @@
     */
     .box
     {
-      background: #E96439;
+      background: #aca36a;
       color: #f2f2f2;
       border: 1px solid #2a2a35;
       border-radius: 6px;
@@ -207,7 +223,7 @@
       font-size: clamp(18px, 2vw, 32px);
       text-align: center;
       margin-top: 8px;
-      font-family: Georgia, serif;
+      font-family: "Orbitron", sans-serif;
     }
 
     .rotation-figure
@@ -272,6 +288,10 @@
       }
     }
 
+    .navbar a:not(.logo) /*Makes sure the top navbar's font is unchanged*/
+    {
+    font-family: sans-serif !important;
+    }
   </style>
 </head>
 
@@ -307,6 +327,10 @@
         <h2>Facts about Saturn!</h2>
         <p>
           <br>
+          - Saturn is the 6th planet from the sun and the second-largest planet in our solar system, after Jupiter. <br><br>
+          - It is a gas giant, primarily composed of hydrogen and helium, with a small rocky core. <br><br>
+          - Saturn is famous for its extensive ring system, which is made up of countless particles of ice and rock, ranging in size from tiny grains to large chunks. <br><br>
+          - The planet takes about 29.5 Earth years to complete one orbit around the Sun
         </p>
       </div>
     </div>
@@ -321,7 +345,7 @@
 
       <figure>
         <img class="photo planet" src="Images/titan.jpg" alt="Saturn's moon Titan">
-        <figcaption>Saturn's moon Titan</figcaption>
+        <figcaption>Saturn's biggest moon Titan</figcaption>
       </figure>
     </div>
 
@@ -329,9 +353,14 @@
     <!-- ===== ROW 3: rotation facts box on the left, rotating Saturn GIF on the right ===== -->
     <div class="rotation-row">
       <div class="box rotation-box">
-        <h2>Saturn's Rotation</h2>
+        <h2>MOAR facts about Saturn</h2>
         <p>
           <br>
+          - Saturn has at least 82 moons, with Titan being the largest and most well-known. <br><br>
+          - The planet has a very low density, which means it would float if placed in a large enough body of water. <br><br>
+          - Saturn's atmosphere is known for its strong winds and storms, including the famous hexagonal storm at its north pole. <br><br>
+          - The planet has a faint ring system, which is not as prominent as Saturn's rings. <br><br>
+          - The planet emits more heat than it receives from the Sun, due to the slow contraction of its interior.
         </p>
       </div>
 

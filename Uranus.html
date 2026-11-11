@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <title>Uranus</title>
+
+  <style>
+    /* 
+      1. PAGE
+      The page itself: spacing, default font and the space picture behind everything. 
+    */
+    body {
+      margin: 0;
+      padding-top: 60px;
+      font-family: sans-serif;
+      background-color: #E96439;
+      background-image: url("Images/spacebox.jpg");
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;
+    }
+
+    /* 
+      2. TOP BARS
+      The navbar (site name + links) and the coloured banner under it that holds the page title.
+    */
+    .navbar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #0a0a0f;
+      border-bottom: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 30px;
+      box-sizing: border-box;
+      z-index: 10;
+    }
+
+    .links {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .navbar a {
+      color: rgb(248, 248, 248);
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    .navbar a:hover {
+      color: #4da3ff;
+    }
+
+    header {
+      position: fixed;
+      top: 40px;
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #47b5ce;
+      display: flex;
+      align-items: flex-end;
+      justify-content: flex-start;
+      padding-left: 30px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      z-index: 5;
+    }
+
+    .logo {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+    /*
+      3. TOP SHOWCASE
+      The top row featuring the interactive free robux buttons and the main Uranus image.
+    */
+    .top-showcase {
+      padding: 100px 4vw 0;
+    }
+
+    .planet-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: clamp(12px, 2vw, 36px);
+      width: 100%;
+    }
+
+    .uranus-figure {
+      display: flex;
+      flex: 1.5 1 0;
+      max-width: 565px;
+      min-width: 0;
+      flex-direction: column;
+      align-items: center;
+      margin: 0;
+    }
+
+    .uranus-main {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      background: #000;
+      border-radius: 14px;
+    }
+
+    .uranus-caption {
+      color: #fff;
+      font-size: clamp(18px, 2vw, 32px);
+      text-align: center;
+      margin-top: 8px;
+    }
+
+    .robux-button {
+      display: inline-flex;
+      flex: 0 1 auto;
+      align-items: center;
+      justify-content: center;
+      border: 0;
+      padding: 0;
+      margin: 0;
+      background: transparent;
+      cursor: pointer;
+      line-height: 0;
+    }
+
+    .robux-button img {
+      display: block;
+      height: clamp(220px, 36vw, 500px);
+      width: auto;
+      max-width: 25vw;
+      object-fit: contain;
+    }
+
+    .robux-button:focus-visible {
+      outline: 3px solid #fff;
+      outline-offset: 5px;
+    }
+
+    /*
+      4. LOWER FEATURE
+      The lower section containing the facts box and the sideways Uranus image.
+    */
+    .lower-feature {
+      display: flex;
+      align-items: stretch;
+      gap: 3vw;
+      padding: 0 4vw;
+      margin: 60px 0 30px;
+    }
+
+    .box {
+      flex: 1 1 auto;
+      min-width: 0;
+      min-height: 350px;
+      background: #3a8298;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .box h2 {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2vw, 40px);
+    }
+
+    .box p {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(16px, 1.2vw, 26px);
+    }
+
+    .sideways-figure {
+      flex: 0 0 clamp(250px, 33.333vw, 417px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+
+    .sideways-figure img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      border-radius: 14px;
+    }
+
+    .sideways-caption {
+      color: #fff;
+      font-size: clamp(16px, 1.5vw, 24px);
+      line-height: 1.4;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    /*
+      5. MOBILE LAYOUT
+      Responsive styles for narrow screens and mobile devices.
+    */
+    @media (max-width: 650px) {
+      .planet-row {
+        flex-direction: column;
+      }
+
+      .uranus-figure {
+        flex: none;
+        width: min(90%, 700px);
+      }
+
+      .robux-button img {
+        height: clamp(180px, 55vw, 340px);
+        max-width: min(32vw, 180px);
+      }
+
+      .lower-feature {
+        flex-direction: column;
+      }
+
+      .sideways-figure {
+        flex-basis: auto;
+        width: min(65%, 417px);
+        align-self: center;
+      }
+
+      .box {
+        min-height: 260px;
+      }
+    }
+
+    /*
+      6. FONTS
+      The AstroSpace font is used for the banner title and everything below it.
+      The navbar (the site name and planet links) keeps the default sans-serif font set on the body.
+      The font file goes in a folder called Fonts, next to this HTML file.
+    */
+    @font-face {
+      font-family: "AstroSpace";
+      src: url("Fonts/AstroSpace-eZ2Bg.ttf") format("truetype");
+      font-display: swap;               /* show the backup font until AstroSpace has loaded */
+    }
+
+    header > .logo,
+    .uranus-caption,
+    .box h2,
+    .box p,
+    .sideways-caption {
+      font-family: "AstroSpace", sans-serif;
+      font-weight: normal;              /* AstroSpace has one weight, so this stops the browser faking extra bold */
+    }
+  </style>
+</head>
+
+<body>
+  <!-- ===== TOP BARS: navbar with planet links, plus the page title banner ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="Testing.html">The Solar System</a>
+      <div class="links">
+        <a href="sun.html">Sun</a>
+        <a href="moon.html">Moon</a>
+        <a href="mercury.html">Mercury</a>
+        <a href="venus.html">Venus</a>
+        <a href="earth.html">Earth</a>
+        <a href="mars.html">Mars</a>
+        <a href="jupiter.html">Jupiter</a>
+        <a href="saturn.html">Saturn</a>
+        <a href="uranus.html">Uranus</a>
+        <a href="neptune.html">Neptune</a>
+      </div>
+    </nav>
+    <span class="logo">Uranus</span>
+  </header>
+
+  <main>
+    <!-- ===== TOP SHOWCASE: clickable freerobux images and uranus ===== -->
+    <section class="top-showcase" aria-label="Uranus images">
+      <div class="planet-row">
+        <button class="robux-button" type="button" aria-label="Play Robux sound">
+          <img src="Images/freerobux1.jpg" alt="Free Robux promotional image">
+        </button>
+
+        <figure class="uranus-figure">
+          <img class="uranus-main" src="Images/uranusplanet.jpg" alt="The planet Uranus">
+          <figcaption class="uranus-caption">The planet Uranus</figcaption>
+        </figure>
+
+        <button class="robux-button" type="button" aria-label="Play Robux sound">
+          <img src="Images/freerobux2.png" alt="Free Robux promotional image">
+        </button>
+      </div>
+      <audio id="robuxAudio" src="Images/robux.m4a" preload="none"></audio>
+    </section>
+
+    <!-- ===== LOWER FEATURE: facts box and sideways uranus image ===== -->
+    <section class="lower-feature">
+      <div class="box">
+        <h2>Facts about Uranus!</h2>
+        <p>
+          <br> - Uranus is the seventh planet from the Sun. <br><br>
+          - Uranus is known for its blue-green color, caused by methane in its atmosphere. <br><br>
+          - It has a system of rings, though they are much fainter than Saturn's. <br><br>
+          - Uranus has 27 known moons, with the largest being Titania and Oberon. <br><br>
+          - Uranus was discovered by William Herschel in 1781, making it the first planet discovered with a telescope. <br><br>
+          - Uranus has a very cold atmosphere, with average temperatures around -224°C (-371°F). <br><br>
+          - Uranus is the only planet in the Solar System that rotates on its side, with its poles facing the Sun. <br><br>
+          - Uranus has a very long year, with one orbit around the Sun taking about 84 Earth years. <br><br>
+        </p>
+      </div>
+
+      <figure class="sideways-figure">
+        <img src="Images/Uranussideways.jpg" alt="Uranus shown sideways with its rings">
+        <figcaption class="sideways-caption">Uranus' tilt results in the planet being sideways</figcaption>
+      </figure>
+    </section>
+  </main>
+
+  <!-- ===== SCRIPT: robux audio click functionality ===== -->
+  <script>
+    const robuxButtons = document.querySelectorAll(".robux-button");
+    const robuxAudio = document.getElementById("robuxAudio");
+
+    robuxButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        robuxAudio.currentTime = 0;
+        robuxAudio.play();
+      });
+    });
+  </script>
+</body>
+</html>
