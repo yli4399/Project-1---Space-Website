@@ -1,0 +1,322 @@
+
+<!doctype html>
+<html>
+<head>
+    <title>Earth</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: sans-serif;
+            background-color: #4f86b3;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: #39947d; border-bottom: 1px solid #2a2a35;
+            display: flex; align-items: center;
+            justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .links { display: flex; overflow-x: auto; white-space: nowrap; }
+
+        .navbar a { color: rgb(248, 245, 245); text-decoration: none; margin-left: 30px; }
+
+        .navbar a:hover { color: #9fffcf; }
+
+        .logo { color: white; font-weight: bold; font-size: 20px; }
+
+        .page {
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 0;
+            font-size: 60px;
+            color: white;
+        }
+
+        .row {
+            display: flex;
+            gap: 40px;
+            height: 620px;
+            padding: 40px 60px;
+        }
+
+        .pic {
+            flex: 0 1 50%;
+        }
+
+        .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .textbox {
+            flex: 0 1 50%;
+            box-sizing: border-box;
+            padding: 35px 40px;
+            background-color: #1f4e79;
+            border: 2px solid #9fe0ff;
+            border-radius: 14px;
+            overflow-y: auto;
+        }
+
+        .textbox h2 {
+            margin: 0 0 25px;
+            font-size: 48px;
+            color: #9fe0ff;
+        }
+
+        .textbox p {
+            margin: 0 0 22px;
+            font-size: 30px;
+            color: #f2f2f2;
+        }
+
+        /* Seasons section */
+
+        .season-box {
+            margin: 0 60px 80px;
+            padding: 35px 40px;
+            background-color: #1f4e79;
+            border: 2px solid #9fe0ff;
+            border-radius: 14px;
+        }
+
+        .season-box h2 {
+            margin: 0 0 25px;
+            font-size: 42px;
+            text-align: center;
+            color: #9fe0ff;
+        }
+
+        .season-buttons {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .season-btn {
+            margin: 0 8px;
+            padding: 14px 34px;
+            font-size: 28px;
+            background-color: #9fe0ff;
+            color: #222;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+        .season-btn:hover {
+            background-color: white;
+        }
+
+        .season-area {
+            width: 800px;
+            height: 420px;
+            position: relative;
+            margin: 0 auto;
+        }
+
+        .season-orbit {
+            position: absolute;
+            left: 100px;
+            top: 80px;
+            width: 600px;
+            height: 260px;
+            border: 2px dashed rgba(255, 255, 255, 0.5);
+            border-radius: 50%;
+        }
+
+        .season-sun {
+            position: absolute;
+            left: 350px;
+            top: 160px;
+            width: 100px;
+            height: 100px;
+            background-color: gold;
+            border-radius: 50%;
+            box-shadow: 0 0 30px orange;
+        }
+
+        .season-earth {
+            position: absolute;
+            left: 65px;
+            top: 175px;
+            width: 70px;
+            height: 70px;
+            background-color: #4da3ff;
+            border: 2px solid white;
+            box-sizing: border-box;
+            border-radius: 50%;
+            transition: left 1s, top 1s;
+        }
+
+        .season-earth.spring { left: 365px; top: 45px; }
+        .season-earth.summer { left: 65px; top: 175px; }
+        .season-earth.fall { left: 365px; top: 305px; }
+        .season-earth.winter { left: 665px; top: 175px; }
+
+        .axis {
+            position: absolute;
+            left: 33px;
+            top: -20px;
+            width: 4px;
+            height: 110px;
+            background-color: white;
+            transform: rotate(23.5deg);
+        }
+
+        .axis span {
+            position: absolute;
+            left: -3px;
+            top: -26px;
+            font-size: 20px;
+            font-weight: bold;
+            color: white;
+        }
+
+        .season-message {
+            margin: 10px 0 0;
+            min-height: 90px;
+            font-size: 30px;
+            text-align: center;
+            color: #f2f2f2;
+        }
+
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a class="logo" href="Solar.html" style="margin-left: 0;">The Solar System</a>
+
+        <div class="links">
+            <a href="sun.html">Sun</a>
+            <a href="moon.html">Moon</a>
+            <a href="mercury.html">Mercury</a>
+            <a href="venus.html">Venus</a>
+            <a href="earth.html">Earth</a>
+            <a href="mars.html">Mars</a>
+            <a href="jupiter.html">Jupiter</a>
+            <a href="saturn.html">Saturn</a>
+            <a href="uranus.html">Uranus</a>
+            <a href="neptune.html">Neptune</a>
+        </div>
+    </nav>
+
+    <div class="page">
+
+        <h1 class="page-title">Earth</h1>
+
+        <div class="row">
+            <div class="pic">
+                <img src="images/earth.jpg" alt="Earth">
+            </div>
+
+            <div class="textbox">
+                <h2>Facts about Earth</h2>
+                <p>-Earth is the third planet from the Sun, about 93 million miles away</p>
+                <p>-It is about 7,918 miles wide</p>
+                <p>-One year on Earth is 365 days, and one day is about 24 hours</p>
+                <p>-Earth has one Moon</p>
+                <p>-About 71% of Earth's surface is covered in water</p>
+                <p>-Earth is the only planet we know of that has life</p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="textbox">
+                <h2>The Blue Planet</h2>
+                <p>Earth is the third planet from the Sun and the only astronomical object known to harbor life. This is made possible by Earth being an ocean world, the only one in the Solar System sustaining liquid surface water. Almost all of Earth's water is contained in its ocean, which covers 70.8% of Earth's crust. The remaining 29.2% of Earth's crust is dry land, which is predominantly located within Earth's land hemisphere in the form of continental landmasses. Most of Earth's land is at least somewhat humid and covered by vegetation, while large ice sheets at Earth's polar deserts retain more water than Earth's groundwater, lakes, rivers, and atmospheric water combined. Earth's crust consists of slowly moving tectonic plates, which interact to produce mountain ranges, volcanoes, and earthquakes. Earth has a liquid outer core that generates a magnetosphere capable of deflecting most of the destructive solar wind and cosmic radiation.</p>
+            </div>
+
+            <div class="pic">
+                <img src="images/earth2.jpg" alt="Earth">
+            </div>
+        </div>
+
+        <!-- Interactive Seasons -->
+
+        <div class="season-box">
+
+            <h2>The Seasons</h2>
+
+            <div class="season-buttons">
+                <button class="season-btn" onclick="showSeason('spring')">Spring</button>
+                <button class="season-btn" onclick="showSeason('summer')">Summer</button>
+                <button class="season-btn" onclick="showSeason('fall')">Fall</button>
+                <button class="season-btn" onclick="showSeason('winter')">Winter</button>
+            </div>
+
+            <div class="season-area">
+
+                <div class="season-orbit"></div>
+
+                <div class="season-sun"></div>
+
+                <div class="season-earth summer">
+                    <div class="axis">
+                        <span>N</span>
+                    </div>
+                </div>
+
+            </div>
+
+            <p class="season-message">
+                Seasons happen because Earth is tilted, not because it is closer to or farther from the Sun. Click a season to see.
+            </p>
+
+        </div>
+
+    </div>
+
+    <script>
+
+        function showSeason(season) {
+
+            let earth = document.querySelector(".season-earth");
+
+            earth.classList.remove("spring");
+            earth.classList.remove("summer");
+            earth.classList.remove("fall");
+            earth.classList.remove("winter");
+
+            earth.classList.add(season);
+
+            let message = "";
+
+            if (season == "spring") {
+
+                message = "In March, neither pole tilts toward the Sun, so day and night are about equal everywhere. Spring starts in the north.";
+
+            } else if (season == "summer") {
+
+                message = "In June, the North Pole tilts toward the Sun. The north gets more direct sunlight and longer days, so it is summer there.";
+
+            } else if (season == "fall") {
+
+                message = "In September, neither pole tilts toward the Sun, so day and night are about equal again. Fall starts in the north.";
+
+            } else if (season == "winter") {
+
+                message = "In December, the North Pole tilts away from the Sun. The north gets weaker sunlight and shorter days, so it is winter there.";
+
+            }
+
+            document.querySelector(".season-message").textContent = message;
+
+        }
+
+    </script>
+
+</body>
+</html>

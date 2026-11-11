@@ -1,0 +1,224 @@
+<!doctype html>
+<html>
+<head>
+    <title>Venus</title>
+
+    <style>
+
+        body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: sans-serif;
+            background-color: #a6783a;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: #6b4318; border-bottom: 1px solid #2a2a35;
+            display: flex; align-items: center;
+            justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+            z-index: 10;
+        }
+        .links { display: flex; overflow-x: auto; white-space: nowrap; }
+        .navbar a { color: rgb(248, 245, 245); text-decoration: none; margin-left: 30px; }
+        .navbar a:hover { color: #ffd37a; }
+        .logo { color: white; font-weight: bold; font-size: 20px; }
+
+        .page {
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 0;
+            font-size: 60px;
+            color: white;
+        }
+
+        .row {
+            display: flex;
+            gap: 40px;
+            height: 620px;
+            padding: 40px 60px;
+        }
+
+        .pic {
+            flex: 0 1 50%;
+        }
+        .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .textbox {
+            flex: 0 1 50%;
+            box-sizing: border-box;
+            padding: 35px 40px;
+            background-color: #6b4318;
+            border: 2px solid #ffd37a;
+            border-radius: 14px;
+            overflow-y: auto;
+        }
+        .textbox h2 {
+            margin: 0 0 25px;
+            font-size: 48px;
+            color: #ffd37a;
+        }
+        .textbox p {
+            margin: 0 0 22px;
+            font-size: 30px;
+            color: #f2f2f2;
+        }
+
+        .slider-box {
+            margin: 0 60px 80px;
+            padding: 35px 40px;
+            background-color: #6b4318;
+            border: 2px solid #ffd37a;
+            border-radius: 14px;
+        }
+        .slider-box h2 {
+            margin: 0 0 30px;
+            font-size: 42px;
+            text-align: center;
+            color: #ffd37a;
+        }
+        .slider-row {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 80px;
+        }
+
+        .globe {
+            width: 320px;
+            height: 320px;
+            position: relative;
+            flex: none;
+        }
+        .globe-color, .globe-clouds {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+        }
+        .globe-color {
+            background-color: rgb(77, 163, 255);
+            box-shadow: 0 0 40px rgba(255, 211, 122, 0.5);
+        }
+        .globe-clouds {
+            background-color: #fff2c4;
+            opacity: 0;
+        }
+
+        .slider-controls {
+            width: 650px;
+        }
+        .slider {
+            width: 100%;
+            height: 30px;
+            cursor: pointer;
+        }
+        .slider-temp {
+            margin: 25px 0 10px;
+            font-size: 80px;
+            font-weight: bold;
+            color: #ffd37a;
+        }
+    </style>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <a class="logo" href="Solar.html" style="margin-left: 0;">The Solar System</a>
+        <div class="links">
+            <a href="sun.html">Sun</a>
+            <a href="moon.html">Moon</a>
+            <a href="mercury.html">Mercury</a>
+            <a href="venus.html">Venus</a>
+            <a href="earth.html">Earth</a>
+            <a href="mars.html">Mars</a>
+            <a href="jupiter.html">Jupiter</a>
+            <a href="saturn.html">Saturn</a>
+            <a href="uranus.html">Uranus</a>
+            <a href="neptune.html">Neptune</a>
+        </div>
+    </nav>
+
+    <div class="page">
+
+    <h1 class="page-title">Venus</h1>
+
+    <div class="row">
+        <div class="pic">
+            <img src="images/venus1.jpg" alt="Venus">
+        </div>
+        <div class="textbox">
+            <h2>Facts about Venus</h2>
+            <p>-Venus is the second planet from the Sun, about 67 million miles away</p>
+            <p>-It is about 7,521 miles wide, almost the same size as Earth</p>
+            <p>-One year on Venus is about 225 Earth days</p>
+            <p>-Venus spins backward compared to most planets</p>
+            <p>-Venus looks foggy when first observed with telescopes</p>
+            <p>-It is the brightest planet in our night sky</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="textbox">
+            <h2>The Hottest Planet</h2>
+            <p>Venus is the second planet from the Sun. Similar in size and mass to Earth, Venus has no liquid water, and its atmosphere is far thicker and denser than that of any other rocky body in the Solar System. The atmosphere is composed mostly of carbon dioxide and has a thick cloud layer of sulfuric acid that spans the whole planet. At the mean surface level, the atmosphere reaches a temperature of 737 K (464 °C; 867 °F), making it the hottest planet in the solar system and also a pressure 92 times greater than Earth's at sea level, turning the lowest layer of the atmosphere into a supercritical fluid. From Earth, Venus is visible as a star-like point of light, appearing brighter than any other natural point of light in the sky, as either the brightest "morning star" or "evening star". It was also given the poetic name Ēarendel in Old English, meaning "ray of light" along with the two previous epithets..</p>
+        </div>
+        <div class="pic">
+            <img src="images/venus2.jpg" alt="The clouds of Venus">
+        </div>
+    </div>
+
+    <div class="slider-box">
+        <h2>Earth vs Venus</h2>
+
+        <div class="slider-row">
+
+            <div class="globe">
+                <div class="globe-color"></div>
+                <div class="globe-clouds"></div>
+            </div>
+
+            <div class="slider-controls">
+                <input class="slider" type="range" min="0" max="100" value="0" oninput="updateSlider()">
+
+                <p class="slider-temp">59°F</p>
+            </div>
+
+        </div>
+    </div>
+
+    </div>
+
+    <script>
+
+        function updateSlider() {
+
+            let amount = Number(document.querySelector(".slider").value);
+
+            let temp = Math.round(59 + (867 - 59) * amount / 100);
+
+            let red = Math.round(77 + (224 - 77) * amount / 100);
+            let green = Math.round(163 + (80 - 163) * amount / 100);
+            let blue = Math.round(255 + (20 - 255) * amount / 100);
+
+            document.querySelector(".globe-color").style.backgroundColor = "rgb(" + red + ", " + green + ", " + blue + ")";
+            document.querySelector(".globe-clouds").style.opacity = amount / 100;
+            document.querySelector(".slider-temp").textContent = temp + "°F";
+        }
+
+    </script>
+
+</body>
+</html>

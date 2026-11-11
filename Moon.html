@@ -1,24 +1,120 @@
 <!doctype html>
 <html>
 <head>
-<style>
-.navbar {
-    position: fixed; top: 0; left: 0; width: 100%; height: 60px;
-    background: #47474b; border-bottom: 1px solid #2a2a35;
-    display: flex; align-items: center;
-    justify-content: space-between; padding: 0 30px; box-sizing: border-box;
-    z-index: 10;
-  }
-.navbar a { color: rgb(248, 245, 245); text-decoration: none; margin-left: 30px; }
-.navbar a:hover { color: #bad5da; }
-body { margin: 0; padding-top: 60px; font-family: sans-serif; background: #858383; }
+    <title>The Moon</title>
 
-.links { display: flex; overflow-x: auto; white-space: nowrap; }
-.logo { color: white; font-weight: bold; font-size: 20px; }
+    <style>
 
-  </style>
+        body {
+            margin: 0;
+            padding-top: 60px;
+            font-family: sans-serif;
+            background-color: #858383;
+        }
+
+        .navbar {
+            position: fixed; top: 0; left: 0; width: 100%; height: 60px;
+            background: #47474b; border-bottom: 1px solid #2a2a35;
+            display: flex; align-items: center;
+            justify-content: space-between; padding: 0 30px; box-sizing: border-box;
+            z-index: 10;
+        }
+        .links { display: flex; overflow-x: auto; white-space: nowrap; }
+        .navbar a { color: rgb(248, 245, 245); text-decoration: none; margin-left: 30px; }
+        .navbar a:hover { color: #bad5da; }
+        .logo { color: white; font-weight: bold; font-size: 20px; }
+
+        .page {
+            max-width: 1900px;
+            margin: 0 auto;
+        }
+
+        .page-title {
+            text-align: center;
+            margin: 40px 0 0;
+            font-size: 60px;
+            color: white;
+        }
+
+        .row {
+            display: flex;
+            gap: 40px;
+            height: 620px;
+            padding: 40px 60px;
+        }
+
+        .pic {
+            flex: 0 1 50%;
+        }
+        .pic img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 14px;
+        }
+
+        .textbox {
+            flex: 0 1 50%;
+            box-sizing: border-box;
+            padding: 35px 40px;
+            background-color: #47474b;
+            border: 2px solid #bad5da;
+            border-radius: 14px;
+            overflow-y: auto;
+        }
+        .textbox h2 {
+            margin: 0 0 25px;
+            font-size: 48px;
+            color: #bad5da;
+        }
+        .textbox p {
+            margin: 0 0 22px;
+            font-size: 30px;
+            color: #f2f2f2;
+        }
+
+        .phases {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 40px 60px 80px;
+        }
+        .phases-title {
+            margin: 0 0 30px;
+            font-size: 48px;
+            color: white;
+        }
+        .phase-img {
+            width: 450px;
+            height: 450px;
+            object-fit: contain;
+            background-color: black;
+            border-radius: 14px;
+        }
+        .phase-name {
+            margin: 25px 0 25px;
+            font-size: 44px;
+            font-weight: bold;
+            color: #bad5da;
+        }
+        .next-btn {
+            padding: 18px 50px;
+            font-size: 30px;
+            background-color: #bad5da;
+            color: #222;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+        }
+        .next-btn:hover {
+            background-color: white;
+        }
+
+    </style>
 </head>
+
 <body>
+
     <nav class="navbar">
         <a class="logo" href="Solar.html" style="margin-left: 0;">The Solar System</a>
         <div class="links">
@@ -34,4 +130,93 @@ body { margin: 0; padding-top: 60px; font-family: sans-serif; background: #85838
             <a href="neptune.html">Neptune</a>
         </div>
     </nav>
- 
+
+    <div class="page">
+
+    <h1 class="page-title">The Moon</h1>
+
+    <div class="row">
+        <div class="pic">
+            <img src="images/moon1.jpg" alt="The Moon">
+        </div>
+        <div class="textbox">
+            <h2>Facts about the Moon</h2>
+            <p>-The Moon is Earth's only Moon</p>
+            <p>-It is about 238,855 miles away from Earth</p>
+            <p>-It is about 2,159 miles wide, roughly a quarter of the size of Earth</p>
+            <p>-It takes about 27 days to orbit Earth</p>
+            <p>-The same side of the Moon always faces Earth</p>
+            <p>-Twelve people have walked on the Moon</p>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="textbox">
+            <h2>The Red Moon</h2>
+            <p>Sometimes the Moon turns a deep red, which is why a total lunar eclipse is often called a "blood moon." It happens when Earth moves directly between the Sun and the Moon, so Earth's shadow falls across the Moon.</p>
+            <p>The Moon does not go completely dark, because some sunlight still bends around the edges of Earth through our atmosphere. The air scatters away the blue light, and the red and orange light gets through and shines onto the Moon. It is the same reason sunsets look red.</p>
+            <p>The exact shade can change from eclipse to eclipse, depending on how much dust and cloud is in Earth's atmosphere.</p>
+        </div>
+        <div class="pic">
+            <img src="images/redmoon.jpg" alt="The red Moon during a total lunar eclipse">
+        </div>
+    </div>
+
+    <div class="phases">
+        <h2 class="phases-title">Phases of the Moon</h2>
+        <img class="phase-img" src="images/newmoon.jpg" alt="New Moon">
+        <p class="phase-name">New Moon</p>
+        <button class="next-btn" onclick="nextDay()">Next Day</button>
+    </div>
+
+    </div>
+
+    <script>
+
+        let phase = 0;
+
+        function nextDay() {
+
+            phase = phase + 1;
+            if (phase > 7) {
+                phase = 0;
+            }
+
+            let image = "";
+            let name = "";
+
+            if (phase == 0) {
+                image = "images/newmoon.jpg";
+                name = "New Moon";
+            } else if (phase == 1) {
+                image = "images/waxingcrescent.jpg";
+                name = "Waxing Crescent";
+            } else if (phase == 2) {
+                image = "images/firstquarter.jpg";
+                name = "First Quarter";
+            } else if (phase == 3) {
+                image = "images/waxinggibbous.jpg";
+                name = "Waxing Gibbous";
+            } else if (phase == 4) {
+                image = "images/fullmoon.jpg";
+                name = "Full Moon";
+            } else if (phase == 5) {
+                image = "images/waninggibbous.jpg";
+                name = "Waning Gibbous";
+            } else if (phase == 6) {
+                image = "images/thirdquarter.jpg";
+                name = "Third Quarter";
+            } else if (phase == 7) {
+                image = "images/waningcrescent.jpg";
+                name = "Waning Crescent";
+            }
+
+            document.querySelector(".phase-img").src = image;
+            document.querySelector(".phase-img").alt = name;
+            document.querySelector(".phase-name").textContent = name;
+        }
+
+    </script>
+
+</body>
+</html>
