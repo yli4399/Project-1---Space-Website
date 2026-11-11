@@ -1,0 +1,370 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Saturn</title>
+
+  <style>
+
+    /*
+      1. PAGE
+      The page itself: spacing, default font and the space picture behind everything.
+    */
+    body
+    {
+      margin: 0;
+      padding-top: 60px;                /* leaves room for the fixed navbar */
+      font-family: sans-serif;
+      background-color: #E96439;        /* backup colour, shown if the picture fails to load */
+      background-image: url("Images/spacebox.jpg");
+      background-size: cover;           /* fills the screen, crops the edges */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-attachment: fixed;     /* the picture stays still while the page scrolls */
+    }
+
+
+    /*
+      2. TOP BARS
+      The navbar and the coloured banner under it that holds the page title.
+    */
+
+    /* navbar: dark bar pinned to the very top */
+    .navbar
+    {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 60px;
+      background: #0a0a0f;
+      border-bottom: 1px solid #2a2a35;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;   /* site name on the left, links on the right */
+      padding: 0 30px;
+      box-sizing: border-box;
+      z-index: 10;                      /* stays above the banner */
+    }
+
+    /* the row of planet links (scrolls sideways if the screen is too narrow) */
+    .links
+    {
+      display: flex;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .navbar a
+    {
+      color: rgb(248, 248, 248);
+      text-decoration: none;
+      margin-left: 30px;
+    }
+
+    .navbar a:hover
+    {
+      color: #4da3ff;
+    }
+
+    /* banner: the colored band under the navbar that holds the page title */
+    header
+    {
+      position: fixed;
+      top: 40px;                        /* part of it sits behind the navbar */
+      left: 0;
+      width: 100%;
+      height: 80px;
+      background: #6b3b34;
+      display: flex;
+      align-items: flex-end;            /* title near the bottom of the band */
+      justify-content: flex-start;      /* title on the left */
+      padding-left: 30px;
+      padding-bottom: 20px;
+      box-sizing: border-box;
+      z-index: 5;                       /* lower than the navbar's 10 */
+    }
+
+    .logo
+    {
+      color: white;
+      font-weight: bold;
+      font-size: 20px;
+    }
+
+
+    /*
+      3. LAYOUT
+      Each feature is a row with space on both sides.
+    */
+    .feature
+    {
+      display: flex;
+      justify-content: space-between;
+      gap: 3vw;
+      flex-wrap: wrap;
+      padding: 0 4vw;
+    }
+
+    /* first row: one facts box stretching across the available width */
+    .feature .wide-box
+    {
+      flex: 1 1 100%;
+      min-width: 0;
+      min-height: clamp(400px, 64vw, 400px); 
+      margin: 100px 0 20px;
+    }
+
+    /* second row: Saturn and Titan pictures side by side */
+    .picture-row
+    {
+      display: flex;
+      gap: 3vw;
+      padding: 0 4vw;
+      margin-bottom: 30px;
+    }
+
+    .picture-row figure
+    {
+      flex: 1 1 0;
+      min-width: 0;
+      margin: 0;
+    }
+
+    /* third row: rotation facts box and GIF side by side */
+    .rotation-row
+    {
+      display: flex;
+      align-items: stretch;             /* facts box reaches the bottom of the video controls */
+      gap: 3vw;
+      padding: 0 4vw;
+      margin-bottom: 60px;
+    }
+
+
+    /*
+      4. BOXES
+      The wide facts box and the Saturn rotation facts box.
+    */
+    .box
+    {
+      background: #E96439;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 6px;
+      padding: 24px;
+      box-sizing: border-box;
+    }
+
+    .wide-box
+    {
+      width: 100%;
+    }
+
+    .rotation-box
+    {
+      flex: 1 1 45%;
+      min-width: 0;
+    }
+
+    .box h2
+    {
+      margin: 0 0 10px;
+      font-size: clamp(22px, 2vw, 40px);
+    }
+
+    .box p
+    {
+      margin: 0;
+      line-height: 1.6;
+      font-size: clamp(16px, 1.2vw, 26px);
+    }
+
+
+    /*
+      5. PICTURES AND CAPTIONS
+      Each picture and its caption are wrapped in a figure.
+    */
+    .photo
+    {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+    }
+
+    .planet
+    {
+      aspect-ratio: 650 / 400;
+      object-fit: contain;
+      background: #000;
+    }
+
+    figcaption
+    {
+      color: #fff;
+      font-size: clamp(18px, 2vw, 32px);
+      text-align: center;
+      margin-top: 8px;
+      font-family: Georgia, serif;
+    }
+
+    .rotation-figure
+    {
+      flex: 1 1 45%;
+      min-width: 0;
+      margin: 0;
+    }
+
+    /* the video keeps the Saturn animation at its natural proportions */
+    .rotation-image
+    {
+      display: block;
+      width: 100%;
+      height: auto;
+      border-radius: 14px;
+      background: #000;
+    }
+
+    .gif-button
+    {
+      display: block;
+      margin: 12px auto 0;
+      padding: 10px 24px;
+      background: #0a0a0f;
+      color: #f2f2f2;
+      border: 1px solid #2a2a35;
+      border-radius: 8px;
+      font: inherit;
+      cursor: pointer;
+    }
+
+    .gif-button:hover
+    {
+      border-color: #4da3ff;
+    }
+
+
+    /*
+      6. RESPONSIVE LAYOUT
+      Stack the pictures and rotation feature on narrow screens.
+    */
+    @media (max-width: 700px)
+    {
+      .picture-row,
+      .rotation-row
+      {
+        flex-direction: column;
+      }
+
+      .picture-row figure,
+      .rotation-box,
+      .rotation-figure
+      {
+        width: 100%;
+        flex-basis: auto;
+      }
+
+      .rotation-box
+      {
+        min-height: 0;
+      }
+    }
+
+  </style>
+</head>
+
+
+<body>
+
+  <!-- ===== TOP BARS: navbar with planet links, plus the page title banner ===== -->
+  <header>
+    <nav class="navbar">
+      <a class="logo" href="Testing.html">The Solar System</a>
+      <div class="links">
+        <a href="sun.html">Sun</a>
+        <a href="moon.html">Moon</a>
+        <a href="mercury.html">Mercury</a>
+        <a href="venus.html">Venus</a>
+        <a href="earth.html">Earth</a>
+        <a href="mars.html">Mars</a>
+        <a href="jupiter.html">Jupiter</a>
+        <a href="saturn.html">Saturn</a>
+        <a href="uranus.html">Uranus</a>
+        <a href="neptune.html">Neptune</a>
+      </div>
+    </nav>
+    <span class="logo">Saturn</span>
+  </header>
+
+
+  <main>
+
+    <!-- ===== ROW 1: wide Saturn facts box ===== -->
+    <div class="feature">
+      <div class="box wide-box">
+        <h2>Facts about Saturn!</h2>
+        <p>
+          <br>
+        </p>
+      </div>
+    </div>
+
+
+    <!-- ===== ROW 2: Saturn picture on the left, Titan picture on the right ===== -->
+    <div class="picture-row">
+      <figure>
+        <img class="photo planet" src="Images/saturnplanet.jpg" alt="Saturn with its rings">
+        <figcaption>The planet Saturn</figcaption>
+      </figure>
+
+      <figure>
+        <img class="photo planet" src="Images/titan.jpg" alt="Saturn's moon Titan">
+        <figcaption>Saturn's moon Titan</figcaption>
+      </figure>
+    </div>
+
+
+    <!-- ===== ROW 3: rotation facts box on the left, rotating Saturn GIF on the right ===== -->
+    <div class="rotation-row">
+      <div class="box rotation-box">
+        <h2>Saturn's Rotation</h2>
+        <p>
+          <br>
+        </p>
+      </div>
+
+      <figure class="rotation-figure">
+        <video class="rotation-image" id="rotation-video" src="Images/saturnrot.mp4" autoplay loop muted playsinline aria-label="An animation of Saturn rotating"></video>
+        <figcaption>Saturn rotating</figcaption>
+        <button class="gif-button" id="gif-toggle" type="button">Pause</button>
+      </figure>
+    </div>
+
+  </main>
+
+
+  <!-- ===== SCRIPT: pause and play the Saturn rotation video ===== -->
+  <script>
+    const rotationVideo = document.getElementById("rotation-video");
+    const gifToggle = document.getElementById("gif-toggle");
+
+    // A video can be paused at its exact current frame and resumed from there.
+    gifToggle.addEventListener("click", function ()
+    {
+      if (rotationVideo.paused)
+      {
+        rotationVideo.play();
+        gifToggle.textContent = "Pause";
+      }
+      else
+      {
+        rotationVideo.pause();
+        gifToggle.textContent = "Play";
+      }
+    });
+  </script>
+
+</body>
+</html>
